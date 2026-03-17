@@ -36,6 +36,7 @@
   background-color: #dfe9f3;
 }
 .nav-bg {
+  background-color: #0097a7;
   margin: 2rem 2rem 2rem 2rem;
   display: flex;
   flex-direction: row;
@@ -43,7 +44,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #0097a7;
+  font-family: 'Roboto', sans-serif;
   color: #ffffff;
   border-radius: 0.8rem;
 }
@@ -62,7 +63,11 @@
   font-weight: bold;
 }
 .nav-footer a:hover {
-  text-decoration: underline;
-  color: #ffc107;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  color: #212121;
+  background-color: #ffc107;
+  padding: 0.8rem;
+  border-radius: 0.8rem;
 }
 </style>
