@@ -3,23 +3,19 @@
 <template>
   <header class="main-header">
     <div class="nav-bg">
-      <div class="nav-logo"></div>
       <nav class="nav-footer">
         <ul>
           <li>
             <router-link :to="{ name: 'Home' }">Inicio</router-link>
           </li>
-
+          <li>
+            <router-link :to="{ name: 'record' }">Registros</router-link>
+          </li>
           <li>
             <router-link :to="{ name: 'collection' }">Colecciones</router-link>
           </li>
-
-          <li>
-            <router-link :to="{ name: 'record' }">Discos</router-link>
-          </li>
         </ul>
       </nav>
-      <nav class="nav-logo"></nav>
     </div>
   </header>
 </template>
@@ -33,17 +29,30 @@
   --gris: #757575;
   --GrisClaro: #dfe9f3;
 }
+.main-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
 
+  width: 100%;
+  height: 0.5rem;
+  background-color: #aa871c;
+  background: linear-gradient(155deg, #aa871c, #a68c3fe2, #aa871c, #a68c3fe2);
+}
 .main-header {
-  background-color: #dfe9f3;
-  height: 7.2rem;
+  position: relative;
+  background-color: #333;
+  background: linear-gradient(135deg, #212121, #757575, #212121);
+  color: white;
+  padding: 20px;
+  height: 9rem;
 }
 
 .nav-bg {
   justify-content: space-between;
-  background-color: #0097a7;
+
   margin: 0 auto;
-  height: 100%;
+  height: 10rem;
   width: min(90rem, 90%);
   display: flex;
   align-items: center;
@@ -52,7 +61,7 @@
   color: #ffffff;
 }
 
-.nav-footer {
+.nav-bg .nav-footer {
   width: 100%;
 }
 
@@ -68,7 +77,7 @@
 .nav-footer a {
   text-decoration: none;
   color: #ffffff;
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: bold;
   padding: 0.8rem;
 }
