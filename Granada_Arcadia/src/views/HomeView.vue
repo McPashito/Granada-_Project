@@ -1,5 +1,6 @@
 <script>
-import Header from '@/components/header.vue'
+import MainHeader from '@/components/MainHeader.vue'
+import MainFooter from '@/components/MainFooter.vue'
 </script>
 
 <template>

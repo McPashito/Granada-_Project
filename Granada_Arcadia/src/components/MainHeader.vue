@@ -3,6 +3,10 @@
 <template>
   <header class="main-header">
     <div class="nav-bg">
+      <div class="licium-logo">
+        <h2>Licium</h2>
+        <h3>Classic</h3>
+      </div>
       <nav class="nav-footer">
         <ul>
           <li>
@@ -39,6 +43,31 @@
   background-color: #aa871c;
   background: linear-gradient(155deg, #aa871c, #a68c3fe2, #aa871c, #a68c3fe2);
 }
+.licium-logo {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.licium-logo h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3rem;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  color: rgb(168, 158, 21);
+  text-decoration: underline;
+  margin: 0;
+}
+
+.licium-logo h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  margin: 0;
+}
+
 .main-header {
   position: relative;
   background-color: #333;

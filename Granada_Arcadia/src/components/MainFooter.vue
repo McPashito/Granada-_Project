@@ -76,6 +76,7 @@ footer {
 .navs {
   grid-column: auto;
   display: grid;
+  height: 100%;
   align-items: center;
   justify-content: center;
   grid-template-columns: 40% auto auto auto;

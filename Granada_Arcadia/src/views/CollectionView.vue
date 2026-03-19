@@ -1,183 +1,20 @@
+<script>
+import { getCollections } from '../services/api.js'
+
+export default {
+  data() {
+    return {
+      collections: [],
+    }
+  },
+  async mounted() {
+    this.collections = await getCollections()
+  },
+}
+</script>
+
 <template>
-  <div>NombreDelArchivo</div>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex eligendi sequi doloribus
-    dignissimos aperiam, fugit aspernatur deserunt, reprehenderit aliquam possimus incidunt corporis
-    distinctio itaque nesciunt iusto suscipit quasi atque officiis.
-  </p>
+  <div v-for="collection in collections" :key="collection.name">
+    <p>{{ collection.metadata_fields['dcterms:title'][0]['@value'] }}</p>
+  </div>
 </template>
