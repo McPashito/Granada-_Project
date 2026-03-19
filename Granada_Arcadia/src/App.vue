@@ -5,8 +5,27 @@ import MainHeader from './components/MainHeader.vue'
 
 <template>
   <MainHeader />
-  <RouterView />
+  <main>
+    <RouterView />
+  </main>
   <MainFooter />
 </template>
 
-<style scoped></style>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+main {
+  flex: 1;
+}
+body {
+  background-color: #18181ad3;
+}
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+</style>

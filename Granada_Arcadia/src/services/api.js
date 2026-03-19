@@ -1,4 +1,4 @@
-const BASE_URL = 'https://arcadium.cluster24.libnamic.eu/api/glam'
+const BASE_URL = '/api/glam'
 
 async function getCollections() {
   const respuesta = await fetch(BASE_URL + '/collection')
