@@ -6,10 +6,10 @@ async function getCollections() {
   return datos.items
 }
 
-async function getRecord() {
+async function getRecords() {
   const respuesta = await fetch(BASE_URL + '/record')
   const datos = await respuesta.json()
   return datos.items
 }
 
-export { getCollections, getRecord }
+export { getCollections, getRecords }

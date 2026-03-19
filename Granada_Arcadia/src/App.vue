@@ -19,6 +19,8 @@ import MainHeader from './components/MainHeader.vue'
 }
 main {
   flex: 1;
+  display: flex;
+  align-items: center;
 }
 body {
   background-color: #18181ad3;

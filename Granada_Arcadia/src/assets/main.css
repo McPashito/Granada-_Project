@@ -1,0 +1,16 @@
+.cuadro {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 0;
+  gap: 1rem;
+  padding: 0;
+}
+.enlace {
+  background-color: #333;
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
