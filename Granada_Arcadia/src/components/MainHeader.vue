@@ -37,7 +37,7 @@
   content: '';
   position: absolute;
   left: 0;
-
+  bottom: 0;
   width: 100%;
   height: 0.5rem;
   background-color: #aa871c;
@@ -73,7 +73,7 @@
   background-color: #333;
   background: linear-gradient(135deg, #212121, #757575, #212121);
   color: white;
-  padding: 20px;
+  padding: 0rem;
   height: 9rem;
 }
 
@@ -81,7 +81,7 @@
   justify-content: space-between;
 
   margin: 0 auto;
-  height: 10rem;
+  height: 9rem;
   width: min(90rem, 90%);
   display: flex;
   align-items: center;

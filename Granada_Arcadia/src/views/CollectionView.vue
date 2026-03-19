@@ -27,9 +27,9 @@ export default {
 .cuadro {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  margin-top: 1rem;
+  margin-top: 0;
   gap: 1rem;
-  padding: 1rem;
+  padding: 0;
 }
 .enlace {
   background-color: #333;
