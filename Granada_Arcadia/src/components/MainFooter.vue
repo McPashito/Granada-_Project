@@ -69,6 +69,7 @@ footer {
   position: relative;
   background-color: #333;
   background: linear-gradient(135deg, #212121, #757575, #212121);
+  font-size: 1.5rem;
   color: white;
   padding: none;
   height: 15rem;
