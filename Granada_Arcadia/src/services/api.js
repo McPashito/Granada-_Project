@@ -1,13 +1,17 @@
 const BASE_URL = '/api/glam'
 
 async function getCollections() {
-  const respuesta = await fetch(BASE_URL + '/collection')
+  const respuesta = await fetch(
+    BASE_URL + '/collection?with_labels=1&fields=id,thumbnail,title,description',
+  )
   const datos = await respuesta.json()
   return datos.items
 }
 
 async function getRecords(offset) {
-  const respuesta = await fetch(BASE_URL + `/record?limit=16&offset=${offset}`)
+  const respuesta = await fetch(
+    BASE_URL + `/record?limit=16&offset=${offset}&with_labels=1&fields=id,thumbnail,title`,
+  )
   const datos = await respuesta.json()
   return datos.items
 }

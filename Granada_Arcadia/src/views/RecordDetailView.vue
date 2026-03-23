@@ -12,11 +12,15 @@ export default {
 }
 </script>
 <template>
-  <section class="cuadro">
-    <div class="enlace" v-if="record">
-      <h3>{{ record.metadata_fields['dcterms:title']?.[0]?.['@value'] }}</h3>
-      <h2>{{ record.metadata_fields['dcterms:creator']?.[0]?.['@value'] }}</h2>
-      <h2>{{ record.metadata_fields['dcterms:date']?.[0]?.['@value'] }}</h2>
+  <section class="cuadro" v-if="record">
+    <div class="enlace">
+      <img :src="'https://arcadium.cluster24.libnamic.eu' + record.thumbnail" alt="" />
+      <h3>{{ record.title }}</h3>
+      <h2>{{ record.creator }}</h2>
+      <h2>{{ record.date }}</h2>
+    </div>
+    <div class="descripcion" v-if="record">
+      <p>{{ record.description }}</p>
     </div>
   </section>
 </template>

@@ -19,7 +19,10 @@ export default {
 <template>
   <section class="cuadro">
     <div class="enlace" v-for="record in records" :key="record.id">
-      <h3>{{ record.metadata_fields['dcterms:title']?.[0]?.['@value'] }}</h3>
+      <router-link :to="`/record/${record.id}`">
+        <img :src="'https://arcadium.cluster24.libnamic.eu' + record.thumbnail" alt="" />
+        <h3>{{ record.title }}</h3>
+      </router-link>
     </div>
   </section>
 </template>

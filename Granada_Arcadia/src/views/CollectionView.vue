@@ -17,7 +17,8 @@ export default {
   <section class="cuadro">
     <div class="enlace" v-for="collection in collections" :key="collection.id">
       <RouterLink :to="`/collection/${collection.id}`">
-        <h3>{{ collection.metadata_fields['dcterms:title'][0]['@value'] }}</h3>
+        <img :src="'https://arcadium.cluster24.libnamic.eu' + collection.thumbnail" alt="" />
+        <h3>{{ collection.title }}</h3>
       </RouterLink>
     </div>
   </section>
