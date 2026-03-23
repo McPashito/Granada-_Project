@@ -15,8 +15,10 @@ export default {
 
 <template>
   <section class="cuadro">
-    <div class="enlace" v-for="collection in collections" :key="collection.name">
-      <h3>{{ collection.metadata_fields['dcterms:title'][0]['@value'] }}</h3>
+    <div class="enlace" v-for="collection in collections" :key="collection.id">
+      <RouterLink :to="`/collection/${collection.id}`">
+        <h3>{{ collection.metadata_fields['dcterms:title'][0]['@value'] }}</h3>
+      </RouterLink>
     </div>
   </section>
 </template>
