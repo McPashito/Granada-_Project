@@ -1,0 +1,13 @@
+:root {
+  --blanco: #ffffff;
+  --oscuro: #212121;
+  --primario: #ffc107;
+  --secundario: #0097a7;
+  --gris: #757575;
+  --gris-claro: #dfe9f3;
+  --superficie: #333333;
+  --gradiente-fondo: linear-gradient(135deg, #212121, #757575, #212121);
+  --gradiente-dorado: linear-gradient(155deg, #aa871c, #a68c3fe2, #aa871c, #a68c3fe2);
+  --dorado: #aa871c;
+  --dorado-logo: rgb(168, 158, 21);
+}

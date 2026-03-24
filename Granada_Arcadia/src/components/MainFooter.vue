@@ -53,55 +53,46 @@
   </footer>
 </template>
 
-<style>
+<style scoped>
+@import '@/assets/variables.css';
+
 footer::before {
   content: '';
   position: absolute;
-
   left: 0;
   width: 100%;
   height: 0.5rem;
-  background-color: #aa871c;
-  background: linear-gradient(155deg, #aa871c, #a68c3fe2, #aa871c, #a68c3fe2);
+  background: var(--gradiente-dorado);
 }
 
 footer {
   position: relative;
-  background-color: #333;
-  background: linear-gradient(135deg, #212121, #757575, #212121);
+  background: var(--gradiente-fondo);
   font-size: 1.5rem;
-  color: white;
-  padding: none;
+  color: var(--blanco);
   height: 15rem;
 }
+
 .navs {
-  grid-column: auto;
   display: grid;
   height: 100%;
   align-items: center;
-  justify-content: center;
   grid-template-columns: 40% auto auto auto;
-  padding: 2rem;
   justify-content: space-evenly;
   padding: 1rem 4rem;
 }
+
 .navs p {
   font-weight: bold;
   text-decoration: underline;
   margin-bottom: 10px;
 }
-.licium-logo {
-  text-align: left;
-  margin-bottom: 20px;
-}
 
 .licium-logo h2 {
   font-family: 'Dancing Script', cursive;
   font-size: 3rem;
-  font-optical-sizing: auto;
   font-weight: 500;
-  font-style: normal;
-  color: rgb(168, 158, 21);
+  color: var(--dorado-logo);
   text-decoration: underline;
   margin: 0;
 }
@@ -109,16 +100,8 @@ footer {
 .licium-logo h3 {
   font-family: 'Dancing Script', cursive;
   font-size: 2rem;
-  font-optical-sizing: auto;
   font-weight: 500;
-  font-style: normal;
   margin: 0;
-}
-
-.menu,
-.sobre-nosotros,
-.contacto {
-  flex: 1;
 }
 
 .Menu ul,
@@ -138,7 +121,7 @@ footer {
 .Menu ul li a,
 .sobre-nosotros ul li a,
 .contacto ul li a {
-  color: white;
+  color: var(--blanco);
   text-decoration: none;
 }
 </style>

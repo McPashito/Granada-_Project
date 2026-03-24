@@ -14,7 +14,11 @@ export default {
 <template>
   <section class="cuadro" v-if="record">
     <div class="enlace">
-      <img :src="'https://arcadium.cluster24.libnamic.eu' + record.thumbnail" alt="" />
+      <img
+        v-if="record.thumbnail"
+        :src="'https://arcadium.cluster24.libnamic.eu' + record.thumbnail"
+        alt=""
+      />
       <h3>{{ record.title }}</h3>
       <h2>{{ record.creator }}</h2>
       <h2>{{ record.date }}</h2>
