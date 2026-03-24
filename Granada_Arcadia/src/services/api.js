@@ -93,6 +93,37 @@ async function searchCollections(search) {
   const datos = await respuesta.json()
   return datos.items
 }
+export async function searchAdvanced(scope, searchText, filters) {
+  const children = []
+
+  if (searchText) {
+    children.push({
+      op: 'or',
+      children: [
+        { type: 'condition', field: 'title', operator: 'ilike', value: `%${searchText}%` },
+        { type: 'condition', field: 'author', operator: 'ilike', value: `%${searchText}%` },
+      ],
+    })
+  }
+
+  for (const filter of filters) {
+    if (filter.field && filter.value) {
+      children.push({
+        op: 'and',
+        children: [
+          { type: 'condition', field: filter.field, operator: 'ilike', value: `%${filter.value}%` },
+        ],
+      })
+    }
+  }
+
+  const domain = { op: 'and', children }
+  const endpoint = scope === 'collections' ? '/collection' : '/record'
+  const url = `${BASE_URL}${endpoint}?with_labels=1&fields=id,thumbnail,title&domain=${encodeURIComponent(JSON.stringify(domain))}`
+  const res = await fetch(url)
+  const data = await res.json()
+  return data.items
+}
 
 export {
   getCollections,
