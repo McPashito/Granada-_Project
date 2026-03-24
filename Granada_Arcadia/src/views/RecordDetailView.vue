@@ -20,6 +20,7 @@ export default {
       <h2>{{ record.date }}</h2>
     </div>
     <div class="descripcion" v-if="record">
+      <h4>Descripcion:</h4>
       <p>{{ record.description }}</p>
     </div>
   </section>
