@@ -4,6 +4,7 @@ import HomeView from '@/views/HomeView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import CollectionDetailView from '@/views/CollectionDetailView.vue'
 import RecordDetailView from '@/views/RecordDetailView.vue'
+import SearchView from '@/views/SearchView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/', // 1. La URL
       name: 'Home', // 2. Un nombre identificador
       component: HomeView, // 3. El componente Vue que se muestra
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: SearchView,
     },
   ],
 })

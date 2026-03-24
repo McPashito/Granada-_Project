@@ -18,6 +18,9 @@
           <li>
             <router-link :to="{ name: 'collection' }">Colecciones</router-link>
           </li>
+          <li>
+            <router-link :to="{ name: 'search' }">Busqueda avanzada</router-link>
+          </li>
         </ul>
       </nav>
     </div>
