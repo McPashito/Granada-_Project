@@ -1,4 +1,14 @@
-<script setup></script>
+<script>
+export default {
+  data() {
+    return {
+      menuAbierto: false,
+      sobreAbierto: false,
+      contactoAbierto: false,
+    }
+  },
+}
+</script>
 
 <template>
   <footer>
@@ -7,48 +17,55 @@
         <h2>Licium</h2>
         <h3>Classic</h3>
       </div>
-      <nav class="Menu">
-        <p>Menú</p>
-        <ul>
-          <li>
-            <router-link :to="{ name: 'Home' }">Inicio</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'record' }">Registros</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'collection' }">Colecciones</router-link>
-          </li>
-        </ul>
-      </nav>
-      <nav class="sobre-nosotros">
-        <p>Sobre Nosotros</p>
-        <ul>
-          <li>
-            <a href="#">Quienes Somos</a>
-          </li>
-          <li>
-            <a href="#">Nuestro cometido</a>
-          </li>
-          <li>
-            <a href="#">Política de Privacidad</a>
-          </li>
-        </ul>
-      </nav>
-      <nav class="contacto">
-        <p>Contacto</p>
-        <ul>
-          <li>
-            <a href="#">Contacto</a>
-          </li>
-          <li>
-            <a href="#">Soporte</a>
-          </li>
-          <li>
-            <a href="#">Redes Sociales</a>
-          </li>
-        </ul>
-      </nav>
+      <div class="botonera">
+        <button class="boton-nav" @click="menuAbierto = !menuAbierto">Menu</button>
+        <nav class="menu" :class="menuAbierto ? 'nav-abierto' : ''">
+          <p>Menú</p>
+          <ul>
+            <li>
+              <router-link :to="{ name: 'Home' }">Inicio</router-link>
+            </li>
+            <li>
+              <router-link :to="{ name: 'record' }">Registros</router-link>
+            </li>
+            <li>
+              <router-link :to="{ name: 'collection' }">Colecciones</router-link>
+            </li>
+          </ul>
+        </nav>
+        <button class="boton-nav" @click="sobreAbierto = !sobreAbierto">Sobre nosotros</button>
+
+        <nav class="sobre-nosotros" :class="sobreAbierto ? 'nav-abierto' : ''">
+          <p>Sobre Nosotros</p>
+          <ul>
+            <li>
+              <a href="#">Quienes Somos</a>
+            </li>
+            <li>
+              <a href="#">Nuestro cometido</a>
+            </li>
+            <li>
+              <a href="#">Política de Privacidad</a>
+            </li>
+          </ul>
+        </nav>
+        <button class="boton-nav" @click="contactoAbierto = !contactoAbierto">Contacto</button>
+
+        <nav class="contacto" :class="contactoAbierto ? 'nav-abierto' : ''">
+          <p>Contacto</p>
+          <ul>
+            <li>
+              <a href="#">Contacto</a>
+            </li>
+            <li>
+              <a href="#">Soporte</a>
+            </li>
+            <li>
+              <a href="#">Redes Sociales</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </section>
   </footer>
 </template>
@@ -71,6 +88,14 @@ footer {
   font-size: 1.5rem;
   color: var(--blanco);
   height: 15rem;
+}
+.boton-nav {
+  display: none;
+}
+.botonera {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
 }
 
 .navs {
@@ -104,7 +129,7 @@ footer {
   margin: 0;
 }
 
-.Menu ul,
+.menu ul,
 .sobre-nosotros ul,
 .contacto ul {
   list-style: none;
@@ -112,13 +137,13 @@ footer {
   margin: 0;
 }
 
-.Menu ul li,
+.menu ul li,
 .sobre-nosotros ul li,
 .contacto ul li {
   margin-bottom: 10px;
 }
 
-.Menu ul li a,
+.menu ul li a,
 .sobre-nosotros ul li a,
 .contacto ul li a {
   color: var(--blanco);
@@ -129,6 +154,14 @@ footer {
     height: auto;
   }
   .navs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem;
+  }
+  .navs p {
+    display: none;
   }
   .licium-logo h2 {
     font-size: 2rem;
@@ -136,6 +169,91 @@ footer {
 
   .licium-logo h3 {
     font-size: 1.33rem;
+  }
+  .boton-nav {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--blanco);
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: left;
+    padding: 0.3rem 0;
+  }
+
+  .menu,
+  .sobre-nosotros,
+  .contacto {
+    display: none;
+  }
+  .menu li {
+    font-size: 1rem;
+    margin: 0.3rem;
+  }
+
+  .menu.nav-abierto,
+  .sobre-nosotros.nav-abierto,
+  .contacto.nav-abierto {
+    display: block;
+  }
+  .botonera {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  footer {
+    height: auto;
+  }
+  .navs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem;
+  }
+  .navs p {
+    display: none;
+  }
+  .licium-logo h2 {
+    font-size: 2rem;
+  }
+
+  .licium-logo h3 {
+    font-size: 1.33rem;
+  }
+  .boton-nav {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--blanco);
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: left;
+    padding: 0.3rem 0;
+  }
+
+  .menu,
+  .sobre-nosotros,
+  .contacto {
+    display: none;
+  }
+  .menu li {
+    font-size: 1rem;
+    margin: 0.3rem;
+  }
+
+  .menu.nav-abierto,
+  .sobre-nosotros.nav-abierto,
+  .contacto.nav-abierto {
+    display: block;
+  }
+  .botonera {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
   }
 }
 </style>
