@@ -1,4 +1,12 @@
-<script setup></script>
+<script>
+export default {
+  data() {
+    return {
+      menuAbierto: false,
+    }
+  },
+}
+</script>
 
 <template>
   <header class="main-header">
@@ -7,20 +15,13 @@
         <h2>Licium</h2>
         <h3>Classic</h3>
       </div>
-      <nav class="nav-footer">
+      <button class="botonburger" @click="menuAbierto = !menuAbierto">☰</button>
+      <nav class="nav-footer" :class="menuAbierto ? 'nav-abierto' : ''">
         <ul>
-          <li>
-            <router-link :to="{ name: 'Home' }">Inicio</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'record' }">Registros</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'collection' }">Colecciones</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'search' }">Busqueda avanzada</router-link>
-          </li>
+          <li><router-link :to="{ name: 'Home' }">Inicio</router-link></li>
+          <li><router-link :to="{ name: 'record' }">Registros</router-link></li>
+          <li><router-link :to="{ name: 'collection' }">Colecciones</router-link></li>
+          <li><router-link :to="{ name: 'search' }">Busqueda avanzada</router-link></li>
         </ul>
       </nav>
     </div>
@@ -96,7 +97,82 @@
 .nav-footer a:hover {
   color: var(--oscuro);
   background-color: var(--primario);
+  text-decoration: underline;
   padding: 0.8rem;
   border-radius: 0.8rem;
+}
+
+.botonburger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .main-header {
+    margin: 0;
+    overflow: hidden;
+    height: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .nav-bg {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 0.8rem 1rem;
+    width: 100%;
+  }
+
+  .licium-logo h2 {
+    font-size: 2rem;
+    font-weight: 350;
+    margin: 0;
+  }
+
+  .licium-logo h3 {
+    font-size: 0.9rem;
+    font-weight: 300;
+    margin: 0;
+  }
+
+  .botonburger {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--blanco);
+    font-size: 2rem;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  .nav-footer {
+    display: none;
+    width: 100%;
+  }
+
+  .nav-footer.nav-abierto {
+    display: block;
+  }
+
+  .nav-footer ul {
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.5rem 0;
+  }
+
+  .nav-footer a {
+    padding: 0.4rem 0;
+    font-size: 1rem;
+  }
+  .nav-footer a:hover {
+    background-color: none;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .nav-footer ul {
+    gap: 1.25rem;
+  }
+  .nav-footer a {
+    padding: 0.2rem;
+    font-size: 1.25rem;
+  }
 }
 </style>

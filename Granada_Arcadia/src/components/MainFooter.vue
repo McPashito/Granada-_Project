@@ -124,4 +124,18 @@ footer {
   color: var(--blanco);
   text-decoration: none;
 }
+@media (max-width: 768px) {
+  footer {
+    height: auto;
+  }
+  .navs {
+  }
+  .licium-logo h2 {
+    font-size: 2rem;
+  }
+
+  .licium-logo h3 {
+    font-size: 1.33rem;
+  }
+}
 </style>
