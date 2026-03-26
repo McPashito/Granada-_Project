@@ -30,4 +30,20 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+.search-group {
+  margin: 1rem 0;
+  font-size: 1.5rem;
+}
+
+.search-input {
+  font-size: 1.5rem;
+}
+
+.search-btn {
+  font-size: 1.5rem;
+}
+
+.search-label {
+  font-size: 1rem;
+}
 </style>
