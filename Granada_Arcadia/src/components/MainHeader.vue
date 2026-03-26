@@ -163,7 +163,7 @@ export default {
     font-size: 1rem;
   }
   .nav-footer a:hover {
-    background-color: none;
+    background-color: transparent;
   }
 }
 @media (min-width: 768px) and (max-width: 1024px) {

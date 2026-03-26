@@ -253,4 +253,27 @@ export default {
 .results-panel {
   width: 100%;
 }
+@media (max-width: 768px) {
+  .search-panel {
+    padding: 1rem !important;
+    gap: 1rem !important;
+  }
+
+  .scope-buttons {
+    flex-direction: column !important;
+  }
+
+  .filter-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.5rem !important;
+    border-bottom: 1px solid var(--gris);
+    padding-bottom: 1rem;
+  }
+
+  .filter-select,
+  .filter-input {
+    width: 100% !important;
+  }
+}
 </style>

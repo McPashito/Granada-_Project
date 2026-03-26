@@ -10,29 +10,29 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/collection', // 1. La URL
-      name: 'collection', // 2. Un nombre identificador
-      component: CollectionView, // 3. El componente Vue que se muestra
+      path: '/collection',
+      name: 'collection',
+      component: CollectionView,
     },
     {
-      path: '/collection/:id', // 1. La URL
-      name: 'collectionid', // 2. Un nombre identificador
-      component: CollectionDetailView, // 3. El componente Vue que se muestra
+      path: '/collection/:id',
+      name: 'collectionid',
+      component: CollectionDetailView,
     },
     {
-      path: '/record', // 1. La URL
-      name: 'record', // 2. Un nombre identificador
-      component: RecordView, // 3. El componente Vue que se muestra
+      path: '/record',
+      name: 'record',
+      component: RecordView,
     },
     {
-      path: '/record/:id', // 1. La URL
-      name: 'recordid', // 2. Un nombre identificador
-      component: RecordDetailView, // 3. El componente Vue que se muestra
+      path: '/record/:id',
+      name: 'recordid',
+      component: RecordDetailView,
     },
     {
-      path: '/', // 1. La URL
-      name: 'Home', // 2. Un nombre identificador
-      component: HomeView, // 3. El componente Vue que se muestra
+      path: '/',
+      name: 'Home',
+      component: HomeView,
     },
     {
       path: '/search',
