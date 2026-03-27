@@ -23,8 +23,12 @@ export default {
       <h2>{{ record.creator }}</h2>
       <h2>{{ record.date }}</h2>
     </div>
+
     <div class="descripcion">
-      <h4>Descripcion:</h4>
+      <h3>Titulo: {{ record.title }}</h3>
+      <h2>Autor: {{ record.creator }}</h2>
+      <h2>Fecha: {{ record.date }}</h2>
+      <h2>Descripcion:</h2>
       <p>{{ record.description }}</p>
     </div>
   </section>
@@ -33,39 +37,32 @@ export default {
 .detalle {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  background-color: dimgray;
+  border-radius: 0.5rem;
   align-items: center;
-  gap: 2rem;
-  padding: 2rem;
-  min-height: 80vh;
+  justify-content: left;
 }
 
 .detalle-imagen {
+  margin-left: 3rem;
+  background-color: dimgray;
+  width: 300px;
+  height: auto;
+}
+.descripcion {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: var(--superficie);
-  border-radius: 0.5rem;
-  overflow: hidden;
-  width: 300px;
-}
+  text-align: left;
 
-.detalle-imagen img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
+  color: aliceblue;
 }
-
-.detalle-imagen h3,
-.detalle-imagen h2 {
-  color: var(--blanco);
-  padding: 0.5rem;
-  text-align: center;
+.descripcion h3 {
+  font-size: 2rem;
 }
-.detalle-imagen h3 {
+.descripcion h2 {
   font-size: 1.5rem;
 }
-.detalle-imagen h2 {
+.descripcion p {
   font-size: 1rem;
 }
 </style>

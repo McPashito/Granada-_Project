@@ -1,5 +1,10 @@
 <script>
+import BrandLogo from './BrandLogo.vue'
+
 export default {
+  components: {
+    BrandLogo,
+  },
   data() {
     return {
       menuAbierto: false,
@@ -10,18 +15,27 @@ export default {
 
 <template>
   <header class="main-header">
-    <div class="nav-bg">
-      <div class="licium-logo">
-        <h2>Licium</h2>
-        <h3>Classic</h3>
-      </div>
-      <button class="botonburger" @click="menuAbierto = !menuAbierto">☰</button>
-      <nav class="nav-footer" :class="menuAbierto ? 'nav-abierto' : ''">
-        <ul>
-          <li><router-link :to="{ name: 'Home' }">Inicio</router-link></li>
-          <li><router-link :to="{ name: 'record' }">Registros</router-link></li>
-          <li><router-link :to="{ name: 'collection' }">Colecciones</router-link></li>
-          <li><router-link :to="{ name: 'search' }">Busqueda avanzada</router-link></li>
+    <div class="main-header__container layout-container">
+      <brand-logo />
+      <button class="main-header__toggle" @click="menuAbierto = !menuAbierto">☰</button>
+      <nav class="main-header__nav" :class="menuAbierto ? 'nav-abierto' : ''">
+        <ul class="main-header__list">
+          <li class="main-header__item">
+            <router-link class="main-header__link" :to="{ name: 'Home' }">Inicio</router-link>
+          </li>
+          <li class="main-header__item">
+            <router-link class="main-header__link" :to="{ name: 'record' }">Registros</router-link>
+          </li>
+          <li class="main-header__item">
+            <router-link class="main-header__link" :to="{ name: 'collection' }"
+              >Colecciones</router-link
+            >
+          </li>
+          <li class="main-header__item">
+            <router-link class="main-header__link" :to="{ name: 'search' }"
+              >Busqueda avanzada</router-link
+            >
+          </li>
         </ul>
       </nav>
     </div>
@@ -49,35 +63,16 @@ export default {
   height: 9rem;
 }
 
-.licium-logo h2 {
-  font-family: 'Dancing Script', cursive;
-  font-size: 3rem;
-  font-weight: 500;
-  color: var(--dorado-logo);
-  text-decoration: underline;
-  margin: 0;
-}
-
-.licium-logo h3 {
-  font-family: 'Dancing Script', cursive;
-  font-size: 2rem;
-  font-weight: 500;
-  margin: 0;
-}
-
-.nav-bg {
+.main-header__container.layout-container {
   justify-content: space-between;
-  margin: 0 auto;
   height: 9rem;
-  width: min(90rem, 90%);
   display: flex;
   align-items: center;
-  padding: 0 2rem;
   font-family: 'Roboto', sans-serif;
   color: var(--blanco);
 }
 
-.nav-footer ul {
+.main-header__list {
   display: flex;
   justify-content: center;
   gap: 3rem;
@@ -86,7 +81,7 @@ export default {
   margin: 0;
 }
 
-.nav-footer a {
+.main-header__link {
   text-decoration: none;
   color: var(--blanco);
   font-size: 2rem;
@@ -94,7 +89,7 @@ export default {
   padding: 0.8rem;
 }
 
-.nav-footer a:hover {
+.main-header__link:hover {
   color: var(--oscuro);
   background-color: var(--primario);
   text-decoration: underline;
@@ -102,7 +97,7 @@ export default {
   border-radius: 0.8rem;
 }
 
-.botonburger {
+.main-header__toggle {
   display: none;
 }
 
@@ -114,26 +109,14 @@ export default {
     padding-bottom: 0.5rem;
   }
 
-  .nav-bg {
+  .main-header__container.layout-container {
     height: auto;
     flex-wrap: wrap;
     padding: 0.8rem 1rem;
     width: 100%;
   }
 
-  .licium-logo h2 {
-    font-size: 2rem;
-    font-weight: 350;
-    margin: 0;
-  }
-
-  .licium-logo h3 {
-    font-size: 0.9rem;
-    font-weight: 300;
-    margin: 0;
-  }
-
-  .botonburger {
+  .main-header__toggle {
     display: block;
     background: none;
     border: none;
@@ -143,34 +126,34 @@ export default {
     margin-left: auto;
   }
 
-  .nav-footer {
+  .main-header__nav {
     display: none;
     width: 100%;
   }
 
-  .nav-footer.nav-abierto {
+  .main-header__nav.nav-abierto {
     display: block;
   }
 
-  .nav-footer ul {
+  .main-header__list {
     flex-direction: column;
     gap: 1rem;
     padding: 0.5rem 0;
   }
 
-  .nav-footer a {
+  .main-header__link {
     padding: 0.4rem 0;
     font-size: 1rem;
   }
-  .nav-footer a:hover {
+  .main-header__link:hover {
     background-color: transparent;
   }
 }
 @media (min-width: 768px) and (max-width: 1024px) {
-  .nav-footer ul {
+  .main-header__list {
     gap: 1.25rem;
   }
-  .nav-footer a {
+  .main-header__link {
     padding: 0.2rem;
     font-size: 1.25rem;
   }

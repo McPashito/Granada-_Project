@@ -1,5 +1,10 @@
 <script>
+import BrandLogo from './BrandLogo.vue'
+
 export default {
+  components: {
+    BrandLogo,
+  },
   data() {
     return {
       menuAbierto: false,
@@ -11,15 +16,12 @@ export default {
 </script>
 
 <template>
-  <footer>
-    <section class="navs">
-      <div class="licium-logo">
-        <h2>Licium</h2>
-        <h3>Classic</h3>
-      </div>
-      <div class="botonera">
-        <button class="boton-nav" @click="menuAbierto = !menuAbierto">Menu</button>
-        <nav class="menu" :class="menuAbierto ? 'nav-abierto' : ''">
+  <footer class="main-footer">
+    <section class="main-footer__container layout-container">
+      <BrandLogo />
+      <div class="main-footer__sections">
+        <button class="main-footer__toggle" @click="menuAbierto = !menuAbierto">Menu</button>
+        <nav class="main-footer__menu" :class="menuAbierto ? 'nav-abierto' : ''">
           <p>Menú</p>
           <ul>
             <li>
@@ -33,9 +35,11 @@ export default {
             </li>
           </ul>
         </nav>
-        <button class="boton-nav" @click="sobreAbierto = !sobreAbierto">Sobre nosotros</button>
+        <button class="main-footer__toggle" @click="sobreAbierto = !sobreAbierto">
+          Sobre nosotros
+        </button>
 
-        <nav class="sobre-nosotros" :class="sobreAbierto ? 'nav-abierto' : ''">
+        <nav class="main-footer__about" :class="sobreAbierto ? 'nav-abierto' : ''">
           <p>Sobre Nosotros</p>
           <ul>
             <li>
@@ -49,9 +53,11 @@ export default {
             </li>
           </ul>
         </nav>
-        <button class="boton-nav" @click="contactoAbierto = !contactoAbierto">Contacto</button>
+        <button class="main-footer__toggle" @click="contactoAbierto = !contactoAbierto">
+          Contacto
+        </button>
 
-        <nav class="contacto" :class="contactoAbierto ? 'nav-abierto' : ''">
+        <nav class="main-footer__contact" :class="contactoAbierto ? 'nav-abierto' : ''">
           <p>Contacto</p>
           <ul>
             <li>
@@ -73,7 +79,7 @@ export default {
 <style scoped>
 @import '@/assets/variables.css';
 
-footer::before {
+.main-footer::before {
   content: '';
   position: absolute;
   left: 0;
@@ -82,95 +88,72 @@ footer::before {
   background: var(--gradiente-dorado);
 }
 
-footer {
+.main-footer {
   position: relative;
   background: var(--gradiente-fondo);
   font-size: 1.5rem;
   color: var(--blanco);
   height: 15rem;
 }
-.boton-nav {
+.main-footer__toggle {
   display: none;
 }
-.botonera {
+.main-footer__sections {
   display: flex;
   flex-direction: row;
   gap: 3rem;
 }
 
-.navs {
+.main-footer__container.layout-container {
   display: grid;
   height: 100%;
   align-items: center;
   grid-template-columns: 40% auto auto auto;
   justify-content: space-evenly;
-  padding: 1rem 4rem;
 }
 
-.navs p {
+.main-footer__container.layout-container p {
   font-weight: bold;
   text-decoration: underline;
   margin-bottom: 10px;
 }
 
-.licium-logo h2 {
-  font-family: 'Dancing Script', cursive;
-  font-size: 3rem;
-  font-weight: 500;
-  color: var(--dorado-logo);
-  text-decoration: underline;
-  margin: 0;
-}
-
-.licium-logo h3 {
-  font-family: 'Dancing Script', cursive;
-  font-size: 2rem;
-  font-weight: 500;
-  margin: 0;
-}
-
-.menu ul,
-.sobre-nosotros ul,
-.contacto ul {
+.main-footer__menu ul,
+.main-footer__about ul,
+.main-footer__contact ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.menu ul li,
-.sobre-nosotros ul li,
-.contacto ul li {
+.main-footer__menu ul li,
+.main-footer__about ul li,
+.main-footer__contact ul li {
   margin-bottom: 10px;
 }
 
-.menu ul li a,
-.sobre-nosotros ul li a,
-.contacto ul li a {
+.main-footer__menu ul li a,
+.main-footer__about ul li a,
+.main-footer__contact ul li a {
   color: var(--blanco);
   text-decoration: none;
 }
 @media (max-width: 768px) {
-  footer {
+  .main-footer {
     height: auto;
   }
-  .navs {
+  .main-footer__container.layout-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     padding: 1rem;
   }
-  .navs p {
+  .main-footer__container.layout-container p {
     display: none;
   }
-  .licium-logo h2 {
-    font-size: 2rem;
-  }
 
-  .licium-logo h3 {
-    font-size: 1.33rem;
-  }
-  .boton-nav {
+  .main-footer__toggle {
     display: block;
     background: none;
     border: none;
@@ -181,22 +164,22 @@ footer {
     padding: 0.3rem 0;
   }
 
-  .menu,
-  .sobre-nosotros,
-  .contacto {
+  .main-footer__menu,
+  .main-footer__about,
+  .main-footer__contact {
     display: none;
   }
-  .menu li {
+  .main-footer__menu li {
     font-size: 1rem;
     margin: 0.3rem;
   }
 
-  .menu.nav-abierto,
-  .sobre-nosotros.nav-abierto,
-  .contacto.nav-abierto {
+  .main-footer__menu.nav-abierto,
+  .main-footer__about.nav-abierto,
+  .main-footer__contact.nav-abierto {
     display: block;
   }
-  .botonera {
+  .main-footer__sections {
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -204,27 +187,20 @@ footer {
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  footer {
+  .main-footer {
     height: auto;
   }
-  .navs {
+  .main-footer__container.layout-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     padding: 1rem;
   }
-  .navs p {
+  .main-footer__container.layout-container p {
     display: none;
   }
-  .licium-logo h2 {
-    font-size: 2rem;
-  }
-
-  .licium-logo h3 {
-    font-size: 1.33rem;
-  }
-  .boton-nav {
+  .main-footer__toggle {
     display: block;
     background: none;
     border: none;
@@ -235,22 +211,22 @@ footer {
     padding: 0.3rem 0;
   }
 
-  .menu,
-  .sobre-nosotros,
-  .contacto {
+  .main-footer__menu,
+  .main-footer__about,
+  .main-footer__contact {
     display: none;
   }
-  .menu li {
+  .main-footer__menu li {
     font-size: 1rem;
     margin: 0.3rem;
   }
 
-  .menu.nav-abierto,
-  .sobre-nosotros.nav-abierto,
-  .contacto.nav-abierto {
+  .main-footer__menu.nav-abierto,
+  .main-footer__about.nav-abierto,
+  .main-footer__contact.nav-abierto {
     display: block;
   }
-  .botonera {
+  .main-footer__sections {
     display: flex;
     flex-direction: row;
     gap: 3rem;

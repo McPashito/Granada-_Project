@@ -3,6 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+.layout-container {
+  width: min(90rem, 90%);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
 
 main {
   display: flex;
