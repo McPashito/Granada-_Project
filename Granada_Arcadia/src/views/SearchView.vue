@@ -95,8 +95,8 @@ export default {
         <h3>Sistema de Búsqueda</h3>
         <p>Configura los parámetros y ejecuta la búsqueda para ver resultados.</p>
       </div>
-      <div v-else class="cuadro">
-        <div class="enlace" v-for="result in results" :key="result.id">
+      <div v-else class="card-grid">
+        <div class="card" v-for="result in results" :key="result.id">
           <router-link :to="`/${result.type}/${result.id}`">
             <img
               v-if="result.thumbnail"

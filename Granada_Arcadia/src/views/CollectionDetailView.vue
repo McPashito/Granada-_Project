@@ -17,31 +17,32 @@ export default {
 </script>
 
 <template>
-  <section class="detalle" v-if="collection">
-    <div class="detalle-imagen">
+  <section class="details" v-if="collection">
+    <div class="details-img">
       <img
         v-if="collection.thumbnail"
         :src="'https://arcadium.cluster24.libnamic.eu' + collection.thumbnail"
         alt=""
       />
-
-      <h2>{{ collection.date }}</h2>
     </div>
-    <div class="descripcion">
-      <h3>{{ collection.title }}</h3>
-      <h4>Descripcion:</h4>
-      <p>{{ collection.description }}</p>
+    <div class="details-description">
+      <h2>Título: {{ collection.title }}</h2>
+      <h2>Fecha: {{ collection.date }}</h2>
+      <h3>Descripcion: {{ collection.description }}</h3>
     </div>
   </section>
-  <h3>Obras en la colección</h3>
-  <section class="cuadro">
-    <div class="enlace" v-for="record in records" :key="record.id">
+
+  <section class="card-grid">
+    <div class="card" v-for="record in records" :key="record.id">
       <router-link :to="`/record/${record.id}`">
-        <img
-          v-if="collection.thumbnail"
-          :src="'https://arcadium.cluster24.libnamic.eu' + record.thumbnail"
-          alt=""
-        />
+        <div class="card-image">
+          <img
+            v-if="record.thumbnail"
+            :src="'https://arcadium.cluster24.libnamic.eu' + record.thumbnail"
+            alt=""
+          />
+        </div>
+
         <h3>{{ record.title }}</h3>
       </router-link>
     </div>

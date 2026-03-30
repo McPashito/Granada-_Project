@@ -12,57 +12,33 @@ export default {
 }
 </script>
 <template>
-  <section class="detalle" v-if="record">
-    <div class="detalle-imagen">
-      <img
-        v-if="record.thumbnail"
-        :src="'https://arcadium.cluster24.libnamic.eu' + record.thumbnail"
-        alt=""
-      />
-      <h3>{{ record.title }}</h3>
-      <h2>{{ record.creator }}</h2>
-      <h2>{{ record.date }}</h2>
-    </div>
-
-    <div class="descripcion">
-      <h3>Titulo: {{ record.title }}</h3>
-      <h2>Autor: {{ record.creator }}</h2>
-      <h2>Fecha: {{ record.date }}</h2>
-      <h2>Descripcion:</h2>
-      <p>{{ record.description }}</p>
-    </div>
+  <section class="record-details">
+    <section class="details" v-if="record">
+      <div class="details-img">
+        <img
+          v-if="record.thumbnail"
+          :src="'https://arcadium.cluster24.libnamic.eu' + record.thumbnail"
+          alt=""
+        />
+      </div>
+      <div class="details-description">
+        <h2>Título: {{ record.title }}</h2>
+        <h2>Fecha: {{ record.date }}</h2>
+        <h3>Descripcion: {{ record.description }}</h3>
+      </div>
+    </section>
   </section>
 </template>
 <style scoped>
-.detalle {
+.record-details {
   display: flex;
-  flex-direction: row;
-  background-color: dimgray;
-  border-radius: 0.5rem;
-  align-items: center;
-  justify-content: left;
-}
-
-.detalle-imagen {
-  margin-left: 3rem;
-  background-color: dimgray;
-  width: 300px;
-  height: auto;
-}
-.descripcion {
-  display: flex;
+  height: 60vh;
   flex-direction: column;
-  text-align: left;
-
-  color: aliceblue;
+  justify-content: center;
+  align-items: center;
 }
-.descripcion h3 {
-  font-size: 2rem;
-}
-.descripcion h2 {
-  font-size: 1.5rem;
-}
-.descripcion p {
-  font-size: 1rem;
+.details {
+  width: 100%;
+  max-width: 1024px;
 }
 </style>

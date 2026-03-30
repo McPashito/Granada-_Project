@@ -43,14 +43,17 @@ export default {
 
 <template>
   <SearchSection @search="searchRes" />
-  <section class="cuadro">
-    <div class="enlace" v-for="record in records" :key="record.id">
+  <section class="card-grid">
+    <div class="card" v-for="record in records" :key="record.id">
       <router-link :to="`/record/${record.id}`">
-        <img
-          v-if="record.thumbnail"
-          :src="'https://arcadium.cluster24.libnamic.eu' + record.thumbnail"
-          alt=""
-        />
+        <div class="card-image">
+          <img
+            v-if="record.thumbnail"
+            :src="'https://arcadium.cluster24.libnamic.eu' + record.thumbnail"
+            alt=""
+          />
+        </div>
+
         <h3>{{ record.title }}</h3>
       </router-link>
     </div>

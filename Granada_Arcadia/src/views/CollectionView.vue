@@ -34,14 +34,17 @@ export default {
 <template>
   <SearchSection @search="searchRes" />
 
-  <section class="cuadro">
-    <div class="enlace" v-for="collection in collections" :key="collection.id">
+  <section class="card-grid">
+    <div class="card" v-for="collection in collections" :key="collection.id">
       <RouterLink :to="`/collection/${collection.id}`">
-        <img
-          v-if="collection.thumbnail"
-          :src="'https://arcadium.cluster24.libnamic.eu' + collection.thumbnail"
-          alt=""
-        />
+        <div class="card-image">
+          <img
+            v-if="collection.thumbnail"
+            :src="'https://arcadium.cluster24.libnamic.eu' + collection.thumbnail"
+            alt=""
+          />
+        </div>
+
         <h3>{{ collection.title }}</h3>
       </RouterLink>
     </div>
