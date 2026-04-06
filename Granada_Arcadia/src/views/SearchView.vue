@@ -6,6 +6,7 @@ export default {
     return {
       search: '',
       scope: 'records',
+      selectedOperator: 'and',
       results: [],
       filters: [{ field: '', value: '' }],
     }
@@ -17,18 +18,40 @@ export default {
     removeFilter(index) {
       this.filters.splice(index, 1)
     },
-    async searchFor() {
+
+    async handleSearch() {
+      const hasValidFilters = this.filters.some((filter) => filter.field && filter.value)
+
+      if (!this.search.trim() && !hasValidFilters) {
+        this.results = []
+        return
+      }
       if (this.scope === 'all') {
-        const records = await searchAdvanced('records', this.search, this.filters)
-        const collections = await searchAdvanced('collections', this.search, this.filters)
+        const records = await searchAdvanced(
+          'records',
+          this.search,
+          this.filters,
+          this.selectedOperator,
+        )
+        const collections = await searchAdvanced(
+          'collections',
+          this.search,
+          this.filters,
+          this.selectedOperator,
+        )
         this.results = [
-          ...records.map((i) => ({ ...i, type: 'record' })),
-          ...collections.map((i) => ({ ...i, type: 'collection' })),
+          ...records.map((record) => ({ ...record, type: 'record' })),
+          ...collections.map((collection) => ({ ...collection, type: 'collection' })),
         ]
       } else {
-        const res = await searchAdvanced(this.scope, this.search, this.filters)
-        this.results = res.map((i) => ({
-          ...i,
+        const foundItems = await searchAdvanced(
+          this.scope,
+          this.search,
+          this.filters,
+          this.selectedOperator,
+        )
+        this.results = foundItems.map((item) => ({
+          ...item,
           type: this.scope === 'records' ? 'record' : 'collection',
         }))
       }
@@ -38,7 +61,7 @@ export default {
 </script>
 
 <template>
-  <div class="search-wrapper">
+  <dive class="search-wrapper">
     <section class="search-panel">
       <h2 class="search-title">¿Qué deseas buscar?</h2>
 
@@ -63,8 +86,13 @@ export default {
           placeholder="Buscar por título o autor..."
         />
       </div>
-
       <div class="filters-group">
+        <p class="search-label">SELECCIONA OPERADOR</p>
+        <select class="filter-select" v-model="selectedOperator">
+          <option value="and">AND</option>
+          <option value="or">OR</option>
+        </select>
+
         <p class="search-label">FILTROS ESPECÍFICOS</p>
         <div class="filter-row" v-for="(filter, index) in filters" :key="index">
           <select class="filter-select" v-model="filter.field">
@@ -83,10 +111,9 @@ export default {
             ✕
           </button>
         </div>
+
         <button class="add-filter" @click="addFilter">+ Añadir parámetro adicional</button>
       </div>
-
-      <button class="search-btn" @click="searchFor">EJECUTAR BÚSQUEDA</button>
     </section>
 
     <section class="results-panel">
@@ -108,7 +135,7 @@ export default {
         </div>
       </div>
     </section>
-  </div>
+  </dive>
 </template>
 
 <style scoped>
@@ -220,6 +247,7 @@ export default {
   cursor: pointer;
   font-size: 0.9rem;
   padding: 0;
+
   text-align: left;
 }
 

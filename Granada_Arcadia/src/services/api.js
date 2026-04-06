@@ -93,7 +93,7 @@ async function searchCollections(search) {
   const datos = await respuesta.json()
   return datos.items
 }
-export async function searchAdvanced(scope, searchText, filters) {
+export async function searchAdvanced(scope, searchText, filters, selectedOperator) {
   const children = []
 
   if (searchText) {
@@ -117,7 +117,7 @@ export async function searchAdvanced(scope, searchText, filters) {
     }
   }
 
-  const domain = { op: 'and', children }
+  const domain = { op: selectedOperator, children }
   const endpoint = scope === 'collections' ? '/collection' : '/record'
   const url = `${BASE_URL}${endpoint}?with_labels=1&fields=id,thumbnail,title&domain=${encodeURIComponent(JSON.stringify(domain))}`
   const res = await fetch(url)
