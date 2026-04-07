@@ -97,7 +97,7 @@ export default {
 
 .main-header__link:hover {
   color: var(--oscuro);
-  background-color: var(--primario);
+  background-color: var(--dorado);
   text-decoration: underline;
   padding: 0.8rem;
   border-radius: 0.8rem;

@@ -13,6 +13,9 @@
 
   --fondo-general: #212121;
   --texto-general: #f5f5f5;
+  --home-overlay: rgba(0, 0, 0, 0.45);
+  --home-card-bg: var(--gris);
+  --home-card-text: var(--blanco);
 }
 
 .light {
@@ -32,4 +35,7 @@
 
   --fondo-general: #e3e6ea;
   --texto-general: #1f1f1f;
+  --home-overlay: rgba(0, 0, 0, 0.08);
+  --home-card-bg: rgba(255, 255, 255, 0.82);
+  --home-card-text: var(--texto-general);
 }
