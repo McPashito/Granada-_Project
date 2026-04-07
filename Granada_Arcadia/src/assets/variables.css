@@ -10,4 +10,26 @@
   --gradiente-dorado: linear-gradient(155deg, #aa871c, #a68c3fe2, #aa871c, #a68c3fe2);
   --dorado: #aa871c;
   --dorado-logo: rgb(168, 158, 21);
+
+  --fondo-general: #212121;
+  --texto-general: #f5f5f5;
+}
+
+.light {
+  --blanco: #1f1f1f;
+  --oscuro: #f3f4f6;
+  --primario: #ffc107;
+  --secundario: #0097a7;
+  --gris: #5f6368;
+  --gris-claro: #e5e7eb;
+  --superficie: #ffffff;
+
+  --gradiente-fondo: linear-gradient(135deg, #fafafb, #e2e8f0, #f1f3f5);
+  --gradiente-dorado: linear-gradient(155deg, #b8922f, #d7ba63, #b8922f, #e2c974);
+
+  --dorado: #aa871c;
+  --dorado-logo: rgb(168, 158, 21);
+
+  --fondo-general: #e3e6ea;
+  --texto-general: #1f1f1f;
 }

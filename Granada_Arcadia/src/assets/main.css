@@ -16,9 +16,13 @@
 main {
   display: flex;
   flex-direction: column;
+  background: var(--fondo-general);
+  color: var(--texto-general);
 }
 body {
   font-family: 'Roboto', sans-serif;
+  background: var(--fondo-general);
+  color: var(--texto-general);
 }
 
 .card-grid {

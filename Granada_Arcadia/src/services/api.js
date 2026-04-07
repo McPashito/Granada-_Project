@@ -1,14 +1,15 @@
 const BASE_URL = '/api/glam'
 
-async function getCollections() {
+async function getCollections(offset = 0) {
   const respuesta = await fetch(
-    BASE_URL + '/collection?with_labels=1&fields=id,thumbnail,title,description',
+    BASE_URL +
+      `/collection?limit=16&offset=${offset}&with_labels=1&fields=id,thumbnail,title,description`,
   )
   const datos = await respuesta.json()
   return datos.items
 }
 
-async function getRecords(offset) {
+async function getRecords(offset = 0) {
   const respuesta = await fetch(
     BASE_URL + `/record?limit=16&offset=${offset}&with_labels=1&fields=id,thumbnail,title`,
   )
@@ -48,7 +49,7 @@ async function getCollectionById(id) {
   const datos = await respuesta.json()
   return datos
 }
-async function searchRecords(search) {
+async function searchRecords(search, offset) {
   const domain = JSON.stringify({
     op: 'and',
     children: [
@@ -65,12 +66,12 @@ async function searchRecords(search) {
     ],
   })
   const respuesta = await fetch(
-    BASE_URL + `/record?limit=24&offset=0&domain=${encodeURIComponent(domain)}`,
+    BASE_URL + `/record?limit=16&offset=${offset}&domain=${encodeURIComponent(domain)}`,
   )
   const datos = await respuesta.json()
   return datos.items
 }
-async function searchCollections(search) {
+async function searchCollections(search, offset) {
   const domain = JSON.stringify({
     op: 'and',
     children: [
@@ -88,7 +89,7 @@ async function searchCollections(search) {
   })
   const respuesta = await fetch(
     BASE_URL +
-      `/collection?with_labels=1&fields=id,thumbnail,title,description&domain=${encodeURIComponent(domain)}`,
+      `/collection?limit=16&offset=${offset}&with_labels=1&fields=id,thumbnail,title,description&domain=${encodeURIComponent(domain)}`,
   )
   const datos = await respuesta.json()
   return datos.items

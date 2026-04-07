@@ -10,6 +10,11 @@ export default {
       menuAbierto: false,
     }
   },
+  methods: {
+    toggleTheme() {
+      document.body.classList.toggle('light')
+    },
+  },
 }
 </script>
 
@@ -38,6 +43,7 @@ export default {
           </li>
         </ul>
       </nav>
+      <button class="main-header__theme" @click="toggleTheme">🌙</button>
     </div>
   </header>
 </template>
@@ -99,6 +105,15 @@ export default {
 
 .main-header__toggle {
   display: none;
+}
+.main-header__theme {
+  background: var(--superficie);
+  color: var(--blanco);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-left: 1rem;
 }
 
 @media (max-width: 768px) {
