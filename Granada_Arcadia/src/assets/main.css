@@ -4,9 +4,6 @@
   box-sizing: border-box;
 }
 
-* {
-  box-sizing: border-box;
-}
 .layout-container {
   width: min(90rem, 90%);
   margin: 0 auto;
@@ -102,11 +99,13 @@ body {
 }
 
 .details {
+  width: 100%;
+  max-width: 1024px;
   display: grid;
   grid-template-columns: 40fr 60fr;
   color: var(--blanco);
   align-items: center;
-  background-color: var(--oscuro);
+  background-color: var(--superficie);
   border-radius: 1rem;
   gap: 1.5rem;
 
@@ -213,7 +212,7 @@ body.light .home-card h2 {
   line-height: 1.6;
 }
 
-@media (min-width: 768px) and (max-width: 1026px) {
+@media (min-width: 769px) and (max-width: 1026px) {
   .semi-navs {
     grid-template-columns: 1fr;
   }
@@ -301,5 +300,42 @@ body.light .home-card h2 {
 
   .paginacion h6 {
     font-size: 1rem !important;
+  }
+  .semi-navs {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .home {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero p,
+  .home-card p {
+    font-size: 1rem;
+  }
+
+  .home-card {
+    padding: 1.25rem;
+  }
+  .details {
+    display: flex;
+    flex-direction: column;
+    margin: 1.2rem;
+    max-width: 90%;
+  }
+  .details-img {
+    height: 250px;
+    width: 100%;
+  }
+  .details-description h2 {
+    font-size: 1.4;
+  }
+  .details-description h3 {
+    font-size: 1rem;
   }
 }
