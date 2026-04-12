@@ -526,10 +526,17 @@ body.light .home-card h2 {
 }
 
 .results-panel {
+  display: flex;
+  flex-direction: row;
   width: 100%;
+  gap: 3rem;
 }
 
 @media (max-width: 768px) {
+  .results-panel {
+    display: flex;
+    flex-direction: column;
+  }
   .search-panel {
     padding: 1rem !important;
     gap: 1rem !important;

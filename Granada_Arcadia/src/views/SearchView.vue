@@ -167,33 +167,43 @@ export default {
         <h3>Sin resultados</h3>
         <p>Los parámetros de búsqueda que has introducido no produjeron ningún resultado</p>
       </div>
-      <div class="card-grid" v-if="results.some((result) => result.type === 'record')">
-        <div
-          class="card"
-          v-for="result in results.filter((res) => res.type === 'record')"
-          :key="`record-${result.id}`"
-        >
-          <router-link :to="`/${result.type}/${result.id}`">
-            <div v-if="result.thumbnail" class="card-image">
-              <img :src="'https://arcadium.cluster24.libnamic.eu' + result.thumbnail" alt="" />
-            </div>
+      <div class="results-panel-records">
+        <h1 v-if="results.some((result) => result.type === 'record')">
+          Resultados que coinciden con registros:
+        </h1>
+        <div class="card-grid" v-if="results.some((result) => result.type === 'record')">
+          <div
+            class="card"
+            v-for="result in results.filter((res) => res.type === 'record')"
+            :key="`record-${result.id}`"
+          >
+            <router-link :to="`/${result.type}/${result.id}`">
+              <div v-if="result.thumbnail" class="card-image">
+                <img :src="'https://arcadium.cluster24.libnamic.eu' + result.thumbnail" alt="" />
+              </div>
 
-            <h3>{{ result.title }}</h3>
-          </router-link>
+              <h3>{{ result.title }}</h3>
+            </router-link>
+          </div>
         </div>
       </div>
-      <div class="card-grid" v-if="results.some((result) => result.type === 'collection')">
-        <div
-          class="card"
-          v-for="result in results.filter((result) => result.type === 'collection')"
-          :key="`collection-${result.id}`"
-        >
-          <router-link :to="`/${result.type}/${result.id}`">
-            <div v-if="result.thumbnail" class="card-image">
-              <img :src="'https://arcadium.cluster24.libnamic.eu' + result.thumbnail" alt="" />
-            </div>
-            <h3>{{ result.title }}</h3>
-          </router-link>
+      <div class="results-pane-collections">
+        <h1 v-if="results.some((result) => result.type === 'collection')">
+          Resultados que coinciden con colecciones:
+        </h1>
+        <div class="card-grid" v-if="results.some((result) => result.type === 'collection')">
+          <div
+            class="card"
+            v-for="result in results.filter((result) => result.type === 'collection')"
+            :key="`collection-${result.id}`"
+          >
+            <router-link :to="`/${result.type}/${result.id}`">
+              <div v-if="result.thumbnail" class="card-image">
+                <img :src="'https://arcadium.cluster24.libnamic.eu' + result.thumbnail" alt="" />
+              </div>
+              <h3>{{ result.title }}</h3>
+            </router-link>
+          </div>
         </div>
       </div>
     </section>
