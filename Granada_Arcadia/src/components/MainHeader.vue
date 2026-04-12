@@ -37,9 +37,7 @@ export default {
             >
           </li>
           <li class="main-header__item">
-            <router-link class="main-header__link" :to="{ name: 'search' }"
-              >Busqueda avanzada</router-link
-            >
+            <router-link class="main-header__link" :to="{ name: 'search' }">Buscador</router-link>
           </li>
         </ul>
       </nav>
@@ -164,7 +162,7 @@ export default {
     background-color: transparent;
   }
 }
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1025px) {
   .main-header__list {
     gap: 1.25rem;
   }
