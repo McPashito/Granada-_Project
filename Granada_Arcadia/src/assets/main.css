@@ -360,11 +360,6 @@ body.light .home-card h2 {
   flex-direction: column;
   gap: 1.5rem;
 }
-@media (min-width: 769px) {
-  .search-panel {
-    min-width: 800px;
-  }
-}
 
 .search-panel form {
   display: flex;
@@ -531,7 +526,15 @@ body.light .home-card h2 {
   width: 100%;
   gap: 3rem;
 }
-
+@media (min-width: 769px) and (max-width: 1025px) {
+  .search-panel {
+    min-width: 800px;
+  }
+  .results-panel {
+    display: flex;
+    flex-direction: column;
+  }
+}
 @media (max-width: 768px) {
   .results-panel {
     display: flex;
