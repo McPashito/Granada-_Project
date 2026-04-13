@@ -1,7 +1,12 @@
 <script>
+import ItemCard from '@/components/ItemCard.vue'
 import { searchAdvanced } from '@/services/api'
+import { imageFormat } from '@/utils/imageFormat'
 
 export default {
+  components: {
+    ItemCard,
+  },
   data() {
     return {
       search: '',
@@ -68,6 +73,8 @@ export default {
         this.isLoading = false
       }
     },
+
+    imageFormat,
   },
 }
 </script>
@@ -172,38 +179,27 @@ export default {
           Resultados que coinciden con registros:
         </h1>
         <div class="card-grid" v-if="results.some((result) => result.type === 'record')">
-          <div
-            class="card"
-            v-for="result in results.filter((res) => res.type === 'record')"
-            :key="`record-${result.id}`"
-          >
-            <router-link :to="`/${result.type}/${result.id}`">
-              <div v-if="result.thumbnail" class="card-image">
-                <img :src="'https://arcadium.cluster24.libnamic.eu' + result.thumbnail" alt="" />
-              </div>
-
-              <h3>{{ result.title }}</h3>
-            </router-link>
-          </div>
+          <ItemCard
+            v-for="result in results.filter((result) => result.type === 'record')"
+            :key="result.id"
+            :title="result.title"
+            :image="result.thumbnail ? imageFormat(result.thumbnail, 'small') : null"
+            :to="`/record/${result.id}`"
+          />
         </div>
       </div>
-      <div class="results-pane-collections">
+      <div class="results-panel-collections">
         <h1 v-if="results.some((result) => result.type === 'collection')">
           Resultados que coinciden con colecciones:
         </h1>
         <div class="card-grid" v-if="results.some((result) => result.type === 'collection')">
-          <div
-            class="card"
+          <ItemCard
             v-for="result in results.filter((result) => result.type === 'collection')"
-            :key="`collection-${result.id}`"
-          >
-            <router-link :to="`/${result.type}/${result.id}`">
-              <div v-if="result.thumbnail" class="card-image">
-                <img :src="'https://arcadium.cluster24.libnamic.eu' + result.thumbnail" alt="" />
-              </div>
-              <h3>{{ result.title }}</h3>
-            </router-link>
-          </div>
+            :key="result.id"
+            :title="result.title"
+            :image="result.thumbnail ? imageFormat(result.thumbnail, 'small') : null"
+            :to="`/collection/${result.id}`"
+          />
         </div>
       </div>
     </section>

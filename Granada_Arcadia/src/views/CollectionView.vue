@@ -1,10 +1,13 @@
 <script>
+import ItemCard from '@/components/ItemCard.vue'
 import SearchSection from '@/components/SearchSection.vue'
 import { getCollections, searchCollections } from '../services/api.js'
+import { imageFormat } from '@/utils/imageFormat'
 
 export default {
   components: {
     SearchSection,
+    ItemCard,
   },
   data() {
     return {
@@ -47,10 +50,7 @@ export default {
       this.offset = 0
       this.collections = await searchCollections(searchText, this.offset)
     },
-
-    imageFormat(url, size) {
-      return 'https://arcadium.cluster24.libnamic.eu' + url + '&size=' + size
-    },
+    imageFormat,
   },
 }
 </script>
@@ -59,19 +59,13 @@ export default {
   <SearchSection @search="handlSearch" />
 
   <section class="card-grid">
-    <div class="card" v-for="collection in collections" :key="collection.id">
-      <RouterLink :to="`/collection/${collection.id}`">
-        <div class="card-image">
-          <img
-            v-if="collection.thumbnail"
-            :src="imageFormat(collection.thumbnail, 'small')"
-            alt=""
-          />
-        </div>
-
-        <h3>{{ collection.title }}</h3>
-      </RouterLink>
-    </div>
+    <ItemCard
+      v-for="collection in collections"
+      :key="collection.id"
+      :title="collection.title"
+      :image="collection.thumbnail ? imageFormat(collection.thumbnail, 'small') : null"
+      :to="`/collection/${collection.id}`"
+    />
   </section>
   <section class="paginacion" v-if="collections.length > 0">
     <button @click="loadLess" :disabled="offset < 16">Anterior</button>

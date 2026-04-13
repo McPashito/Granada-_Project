@@ -1,9 +1,12 @@
 <script>
+import ItemCard from '@/components/ItemCard.vue'
 import SearchSection from '@/components/SearchSection.vue'
 import { getRecords, searchRecords } from '../services/api.js'
+import { imageFormat } from '@/utils/imageFormat'
 
 export default {
   components: {
+    ItemCard,
     SearchSection,
   },
   data() {
@@ -47,6 +50,7 @@ export default {
       this.offset = 0
       this.records = await searchRecords(searchText, this.offset)
     },
+    imageFormat,
   },
 }
 </script>
@@ -54,19 +58,13 @@ export default {
 <template>
   <SearchSection @search="handleSearch" />
   <section class="card-grid">
-    <div class="card" v-for="record in records" :key="record.id">
-      <router-link :to="`/record/${record.id}`">
-        <div class="card-image">
-          <img
-            v-if="record.thumbnail"
-            :src="'https://arcadium.cluster24.libnamic.eu' + record.thumbnail"
-            alt=""
-          />
-        </div>
-
-        <h3>{{ record.title }}</h3>
-      </router-link>
-    </div>
+    <ItemCard
+      v-for="record in records"
+      :key="record.id"
+      :title="record.title"
+      :image="record.thumbnail ? imageFormat(record.thumbnail, 'small') : null"
+      :to="`/record/${record.id}`"
+    />
   </section>
   <section class="paginacion" v-if="records.length > 0">
     <button @click="loadLess" :disabled="offset < 16">Anterior</button>

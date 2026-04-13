@@ -1,6 +1,11 @@
 <script>
 import { getRecordById } from '@/services/api'
+import { imageFormat } from '@/utils/imageFormat'
+import DetailCard from '@/components/DetailCard.vue'
 export default {
+  components: {
+    DetailCard,
+  },
   data() {
     return {
       record: null,
@@ -10,21 +15,17 @@ export default {
     this.record = await getRecordById(this.$route.params.id)
   },
   methods: {
-    imageFormat(url, size) {
-      return 'https://arcadium.cluster24.libnamic.eu' + url + '&size=' + size
-    },
+    imageFormat,
   },
 }
 </script>
 <template>
-  <section class="details" v-if="record">
-    <div class="details-img">
-      <img v-if="record.thumbnail" :src="imageFormat(record.thumbnail, 'large')" alt="" />
-    </div>
-    <div class="details-description">
-      <h2>Título: {{ record.title }}</h2>
-      <h2>Fecha: {{ record.date }}</h2>
-      <h3>Descripcion: {{ record.description }}</h3>
-    </div>
-  </section>
+  <DetailCard
+    v-if="record"
+    :key="record.id"
+    :image="record?.thumbnail ? imageFormat(record.thumbnail, 'large') : null"
+    :title="record.title"
+    :date="record.date"
+    :description="record.description"
+  />
 </template>
