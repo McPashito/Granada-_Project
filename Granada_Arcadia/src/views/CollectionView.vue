@@ -47,6 +47,10 @@ export default {
       this.offset = 0
       this.collections = await searchCollections(searchText, this.offset)
     },
+
+    imageFormat(url, size) {
+      return 'https://arcadium.cluster24.libnamic.eu' + url + '&size=' + size
+    },
   },
 }
 </script>
@@ -60,7 +64,7 @@ export default {
         <div class="card-image">
           <img
             v-if="collection.thumbnail"
-            :src="'https://arcadium.cluster24.libnamic.eu' + collection.thumbnail"
+            :src="imageFormat(collection.thumbnail, 'small')"
             alt=""
           />
         </div>

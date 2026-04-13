@@ -9,16 +9,17 @@ export default {
   async mounted() {
     this.record = await getRecordById(this.$route.params.id)
   },
+  methods: {
+    imageFormat(url, size) {
+      return 'https://arcadium.cluster24.libnamic.eu' + url + '&size=' + size
+    },
+  },
 }
 </script>
 <template>
   <section class="details" v-if="record">
     <div class="details-img">
-      <img
-        v-if="record.thumbnail"
-        :src="'https://arcadium.cluster24.libnamic.eu' + record.thumbnail"
-        alt=""
-      />
+      <img v-if="record.thumbnail" :src="imageFormat(record.thumbnail, 'large')" alt="" />
     </div>
     <div class="details-description">
       <h2>Título: {{ record.title }}</h2>
