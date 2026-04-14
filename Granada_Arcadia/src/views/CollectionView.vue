@@ -1,6 +1,7 @@
 <script>
 import ItemCard from '@/components/ItemCard.vue'
 import SearchSection from '@/components/SearchSection.vue'
+import PaginationComponent from '@/components/PaginationComponent.vue'
 import { getCollections, searchCollections } from '../services/api.js'
 import { imageFormat } from '@/utils/imageFormat'
 
@@ -8,6 +9,7 @@ export default {
   components: {
     SearchSection,
     ItemCard,
+    PaginationComponent,
   },
   data() {
     return {
@@ -67,9 +69,10 @@ export default {
       :to="`/collection/${collection.id}`"
     />
   </section>
-  <section class="paginacion" v-if="collections.length > 0">
-    <button @click="loadLess" :disabled="offset < 16">Anterior</button>
-    <h6>Página {{ offset / 16 + 1 }}</h6>
-    <button @click="loadMore" :disabled="collections.length < 16">Siguiente</button>
-  </section>
+  <PaginationComponent
+    :offset="offset"
+    :itemsLength="collections.length"
+    @prev="loadLess"
+    @next="loadMore"
+  />
 </template>

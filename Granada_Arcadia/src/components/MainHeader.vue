@@ -23,6 +23,8 @@ export default {
     <div class="main-header__container layout-container">
       <brand-logo />
       <button class="main-header__toggle" @click="menuAbierto = !menuAbierto">☰</button>
+      <button class="main-header__theme" @click="toggleTheme">🌙</button>
+
       <nav class="main-header__nav" :class="menuAbierto ? 'nav-abierto' : ''">
         <ul class="main-header__list">
           <li class="main-header__item">
@@ -41,7 +43,6 @@ export default {
           </li>
         </ul>
       </nav>
-      <button class="main-header__theme" @click="toggleTheme">🌙</button>
     </div>
   </header>
 </template>

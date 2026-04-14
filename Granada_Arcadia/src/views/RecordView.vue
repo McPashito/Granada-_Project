@@ -1,5 +1,6 @@
 <script>
 import ItemCard from '@/components/ItemCard.vue'
+import PaginationComponent from '@/components/PaginationComponent.vue'
 import SearchSection from '@/components/SearchSection.vue'
 import { getRecords, searchRecords } from '../services/api.js'
 import { imageFormat } from '@/utils/imageFormat'
@@ -7,6 +8,7 @@ import { imageFormat } from '@/utils/imageFormat'
 export default {
   components: {
     ItemCard,
+    PaginationComponent,
     SearchSection,
   },
   data() {
@@ -61,14 +63,15 @@ export default {
     <ItemCard
       v-for="record in records"
       :key="record.id"
-      :title="record.title"
+      :title="record.title || 'Sin título'"
       :image="record.thumbnail ? imageFormat(record.thumbnail, 'small') : null"
       :to="`/record/${record.id}`"
     />
   </section>
-  <section class="paginacion" v-if="records.length > 0">
-    <button @click="loadLess" :disabled="offset < 16">Anterior</button>
-    <h6>Página {{ offset / 16 + 1 }}</h6>
-    <button @click="loadMore" :disabled="records.length < 16">Siguiente</button>
-  </section>
+  <PaginationComponent
+    :offset="offset"
+    :itemsLength="records.length"
+    @prev="loadLess"
+    @next="loadMore"
+  />
 </template>

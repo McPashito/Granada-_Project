@@ -1,6 +1,6 @@
 <script>
 import { getCollectionById, getRecordsFromCollection } from '@/services/api'
-import { imageFormat } from '@/utils/imageFormat'
+import { imageFormat } from '@/utils/imageFormat.js'
 import ItemCard from '@/components/ItemCard.vue'
 import DetailCard from '@/components/DetailCard.vue'
 
@@ -29,7 +29,6 @@ export default {
 <template>
   <DetailCard
     v-if="collection"
-    :key="collection.id"
     :image="collection?.thumbnail ? imageFormat(collection.thumbnail, 'large') : null"
     :title="collection.title"
     :date="collection.date"
@@ -40,7 +39,7 @@ export default {
     <ItemCard
       v-for="record in records"
       :key="record.id"
-      :title="record.title"
+      :title="record.title || 'Sin título'"
       :image="record.thumbnail ? imageFormat(record.thumbnail, 'small') : null"
       :to="`/record/${record.id}`"
     />

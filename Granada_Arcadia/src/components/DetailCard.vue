@@ -24,9 +24,9 @@ defineProps({
       <img v-if="image" :src="image" alt="title" />
     </div>
     <div class="details-description">
-      <h2>Título: {{ title }}</h2>
-      <h2>Fecha: {{ date }}</h2>
-      <h3>Descripcion: {{ description }}</h3>
+      <h3>Título: {{ title }}</h3>
+      <h3>Fecha: {{ date }}</h3>
+      <h2>Descripcion: {{ description }}</h2>
     </div>
   </section>
 </template>
