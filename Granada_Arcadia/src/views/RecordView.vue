@@ -3,19 +3,22 @@ import ItemCard from '@/components/ItemCard.vue'
 import PaginationComponent from '@/components/PaginationComponent.vue'
 import SearchSection from '@/components/SearchSection.vue'
 import { getRecords, searchRecords } from '../services/api.js'
-import { imageFormat } from '@/utils/imageFormat'
+import SearchInfo from '@/components/SearchInfo.vue'
 
 export default {
   components: {
     ItemCard,
     PaginationComponent,
     SearchSection,
+    SearchInfo,
   },
   data() {
     return {
       offset: 0,
       records: [],
       searchText: '',
+      hasSearched: false,
+      isLoading: false,
     }
   },
   async mounted() {
@@ -43,28 +46,45 @@ export default {
     },
     async handleSearch(searchText) {
       this.searchText = searchText
-      if (!searchText.trim()) {
-        this.offset = 0
-        this.records = await getRecords(this.offset)
-        return
-      }
+      if (this.isLoading) return
 
-      this.offset = 0
-      this.records = await searchRecords(searchText, this.offset)
+      this.isLoading = true
+      this.hasSearched = true
+      try {
+        if (!searchText.trim()) {
+          this.offset = 0
+          this.records = await getRecords(this.offset)
+
+          return
+        } else {
+          this.offset = 0
+          this.records = await searchRecords(searchText, this.offset)
+        }
+      } catch (error) {
+        console.error('Error searching records:', error)
+        this.records = []
+      } finally {
+        this.isLoading = false
+      }
     },
-    imageFormat,
   },
 }
 </script>
 
 <template>
   <SearchSection @search="handleSearch" />
-  <section class="card-grid">
+  <SearchInfo
+    v-if="hasSearched"
+    :results="records"
+    :isLoading="isLoading"
+    :hasSearched="hasSearched"
+  />
+  <section class="card-grid" v-if="records.length > 0">
     <ItemCard
       v-for="record in records"
       :key="record.id"
       :title="record.title || 'Sin título'"
-      :image="record.thumbnail ? imageFormat(record.thumbnail, 'small') : null"
+      :image="record.thumbnail || null"
       :to="`/record/${record.id}`"
     />
   </section>

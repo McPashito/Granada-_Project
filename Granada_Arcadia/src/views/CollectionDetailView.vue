@@ -16,7 +16,6 @@ export default {
     }
   },
   async mounted() {
-    console.log(this.$route.params.id)
     this.collection = await getCollectionById(this.$route.params.id)
     this.records = await getRecordsFromCollection({ collectionId: this.$route.params.id })
   },
@@ -40,7 +39,7 @@ export default {
       v-for="record in records"
       :key="record.id"
       :title="record.title || 'Sin título'"
-      :image="record.thumbnail ? imageFormat(record.thumbnail, 'small') : null"
+      :image="record.thumbnail || null"
       :to="`/record/${record.id}`"
     />
   </section>

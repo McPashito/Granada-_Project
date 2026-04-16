@@ -3,21 +3,25 @@ import ItemCard from '@/components/ItemCard.vue'
 import SearchSection from '@/components/SearchSection.vue'
 import PaginationComponent from '@/components/PaginationComponent.vue'
 import { getCollections, searchCollections } from '../services/api.js'
-import { imageFormat } from '@/utils/imageFormat'
+import SearchInfo from '@/components/SearchInfo.vue'
 
 export default {
   components: {
     SearchSection,
     ItemCard,
     PaginationComponent,
+    SearchInfo,
   },
   data() {
     return {
       offset: 0,
       collections: [],
       searchText: '',
+      hasSearched: false,
+      isLoading: false,
     }
   },
+
   async mounted() {
     this.collections = await getCollections(this.offset)
   },
@@ -41,31 +45,48 @@ export default {
         }
       }
     },
-    async handlSearch(searchText) {
+    async handleSearch(searchText) {
       this.searchText = searchText
-      if (!searchText.trim()) {
-        this.offset = 0
-        this.collections = await getCollections(this.offset)
-        return
-      }
+      if (this.isLoading) return
 
-      this.offset = 0
-      this.collections = await searchCollections(searchText, this.offset)
+      this.isLoading = true
+      this.hasSearched = true
+      try {
+        if (!searchText.trim()) {
+          this.offset = 0
+          this.collections = await getCollections(this.offset)
+
+          return
+        } else {
+          this.offset = 0
+          this.collections = await searchCollections(searchText, this.offset)
+        }
+      } catch (error) {
+        console.error('Error searching collections:', error)
+        this.collections = []
+      } finally {
+        this.isLoading = false
+      }
     },
-    imageFormat,
   },
 }
 </script>
 
 <template>
-  <SearchSection @search="handlSearch" />
+  <SearchSection @search="handleSearch" />
+  <SearchInfo
+    v-if="hasSearched"
+    :results="collections"
+    :isLoading="isLoading"
+    :hasSearched="hasSearched"
+  />
 
-  <section class="card-grid">
+  <section class="card-grid" v-if="collections.length > 0">
     <ItemCard
       v-for="collection in collections"
       :key="collection.id"
       :title="collection.title"
-      :image="collection.thumbnail ? imageFormat(collection.thumbnail, 'small') : null"
+      :image="collection.thumbnail || null"
       :to="`/collection/${collection.id}`"
     />
   </section>

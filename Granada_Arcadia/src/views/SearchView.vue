@@ -1,11 +1,12 @@
 <script>
 import ItemCard from '@/components/ItemCard.vue'
+import SearchInfo from '@/components/SearchInfo.vue'
 import { searchAdvanced } from '@/services/api'
-import { imageFormat } from '@/utils/imageFormat'
 
 export default {
   components: {
     ItemCard,
+    SearchInfo,
   },
   data() {
     return {
@@ -73,8 +74,6 @@ export default {
         this.isLoading = false
       }
     },
-
-    imageFormat,
   },
 }
 </script>
@@ -159,21 +158,7 @@ export default {
     </section>
 
     <section class="results-panel">
-      <div v-if="!hasSearched" class="empty-state">
-        <span class="empty-icon">🔍</span>
-        <h3>Sistema de Búsqueda</h3>
-        <p>Configura los parámetros y ejecuta la búsqueda para ver resultados.</p>
-      </div>
-      <div v-else-if="isLoading" class="empty-state">
-        <span class="empty-icon">⏳</span>
-        <h3>Buscando...</h3>
-        <p>Espere mientras se realiza la búsqueda</p>
-      </div>
-      <div v-else-if="results.length === 0" class="empty-state">
-        <span class="empty-icon">❌</span>
-        <h3>Sin resultados</h3>
-        <p>Los parámetros de búsqueda que has introducido no produjeron ningún resultado</p>
-      </div>
+      <SearchInfo :results="results" :isLoading="isLoading" :hasSearched="hasSearched" />
       <div class="results-panel-records">
         <h1 v-if="results.some((result) => result.type === 'record')">
           Resultados que coinciden con registros:
@@ -183,7 +168,7 @@ export default {
             v-for="result in results.filter((result) => result.type === 'record')"
             :key="result.id"
             :title="result.title"
-            :image="result.thumbnail ? imageFormat(result.thumbnail, 'small') : null"
+            :image="result.thumbnail || null"
             :to="`/record/${result.id}`"
           />
         </div>
@@ -197,7 +182,7 @@ export default {
             v-for="result in results.filter((result) => result.type === 'collection')"
             :key="result.id"
             :title="result.title"
-            :image="result.thumbnail ? imageFormat(result.thumbnail, 'small') : null"
+            :image="result.thumbnail || null"
             :to="`/collection/${result.id}`"
           />
         </div>
