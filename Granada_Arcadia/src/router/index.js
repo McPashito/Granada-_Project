@@ -13,31 +13,37 @@ const router = createRouter({
       path: '/collection',
       name: 'collection',
       component: CollectionView,
+      meta: { title: 'Colecciones' },
     },
     {
       path: '/collection/:id',
       name: 'collectionid',
       component: CollectionDetailView,
+      meta: { title: 'Detalle de Colección' },
     },
     {
       path: '/record',
       name: 'record',
       component: RecordView,
+      meta: { title: 'Registros' },
     },
     {
       path: '/record/:id',
       name: 'recordid',
       component: RecordDetailView,
+      meta: { title: 'Detalle de Registro' },
     },
     {
       path: '/',
       name: 'Home',
       component: HomeView,
+      meta: { title: 'Inicio' },
     },
     {
       path: '/search',
       name: 'search',
       component: SearchView,
+      meta: { title: 'Búsqueda' },
     },
   ],
 })

@@ -2,7 +2,7 @@
 import ItemCard from '@/components/ItemCard.vue'
 import SearchSection from '@/components/SearchSection.vue'
 import PaginationComponent from '@/components/PaginationComponent.vue'
-import { getCollections, searchCollections } from '../services/api.js'
+import { getItem, searchItems } from '../services/api.js'
 import SearchInfo from '@/components/SearchInfo.vue'
 
 export default {
@@ -14,6 +14,7 @@ export default {
   },
   data() {
     return {
+      entity: 'collection',
       offset: 0,
       collections: [],
       searchText: '',
@@ -23,15 +24,15 @@ export default {
   },
 
   async mounted() {
-    this.collections = await getCollections(this.offset)
+    this.collections = await getItem(this.offset, this.entity)
   },
   methods: {
     async loadMore() {
       this.offset += 16
       if (this.searchText.trim()) {
-        this.collections = await searchCollections(this.searchText, this.offset)
+        this.collections = await searchItems(this.searchText, this.offset, this.entity)
       } else {
-        this.collections = await getCollections(this.offset)
+        this.collections = await getItem(this.offset, this.entity)
       }
     },
     async loadLess() {
@@ -39,9 +40,9 @@ export default {
         this.offset -= 16
 
         if (this.searchText.trim()) {
-          this.collections = await searchCollections(this.searchText, this.offset)
+          this.collections = await searchItems(this.searchText, this.offset, this.entity)
         } else {
-          this.collections = await getCollections(this.offset)
+          this.collections = await getItem(this.offset, this.entity)
         }
       }
     },
@@ -54,12 +55,12 @@ export default {
       try {
         if (!searchText.trim()) {
           this.offset = 0
-          this.collections = await getCollections(this.offset)
+          this.collections = await getItem(this.offset, this.entity)
 
           return
         } else {
           this.offset = 0
-          this.collections = await searchCollections(searchText, this.offset)
+          this.collections = await searchItems(this.searchText, this.offset, this.entity)
         }
       } catch (error) {
         console.error('Error searching collections:', error)

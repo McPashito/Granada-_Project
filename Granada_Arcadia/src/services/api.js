@@ -1,21 +1,20 @@
 const BASE_URL = '/api/glam'
 
-async function getCollections(offset = 0) {
+async function getItem(offset = 0, entity) {
   const respuesta = await fetch(
     BASE_URL +
-      `/collection?limit=16&offset=${offset}&with_labels=1&fields=id,thumbnail,title,description`,
+      `/${entity}?limit=16&offset=${offset}&with_labels=1&fields=id,thumbnail,title,description`,
   )
   const datos = await respuesta.json()
   return datos.items
 }
 
-async function getRecords(offset = 0) {
-  const respuesta = await fetch(
-    BASE_URL + `/record?limit=16&offset=${offset}&with_labels=1&fields=id,thumbnail,title`,
-  )
+async function getItemById(id, entity) {
+  const respuesta = await fetch(BASE_URL + `/${entity}/${id}`)
   const datos = await respuesta.json()
-  return datos.items
+  return datos
 }
+
 async function getRecordsFromCollection(params) {
   const domain = JSON.stringify({
     op: 'and',
@@ -39,17 +38,8 @@ async function getRecordsFromCollection(params) {
   const datos = await respuesta.json()
   return datos.items
 }
-async function getRecordById(id) {
-  const respuesta = await fetch(BASE_URL + `/record/${id}`)
-  const datos = await respuesta.json()
-  return datos
-}
-async function getCollectionById(id) {
-  const respuesta = await fetch(BASE_URL + `/collection/${id}`)
-  const datos = await respuesta.json()
-  return datos
-}
-async function searchRecords(search, offset) {
+
+async function searchItems(search, offset, entity) {
   const domain = JSON.stringify({
     op: 'and',
     children: [
@@ -66,34 +56,12 @@ async function searchRecords(search, offset) {
     ],
   })
   const respuesta = await fetch(
-    BASE_URL + `/record?limit=16&offset=${offset}&domain=${encodeURIComponent(domain)}`,
+    BASE_URL + `/${entity}?limit=16&offset=${offset}&domain=${encodeURIComponent(domain)}`,
   )
   const datos = await respuesta.json()
   return datos.items
 }
-async function searchCollections(search, offset) {
-  const domain = JSON.stringify({
-    op: 'and',
-    children: [
-      {
-        op: 'and',
-        children: [
-          {
-            type: 'text',
-            mode: 'fulltext',
-            value: search,
-          },
-        ],
-      },
-    ],
-  })
-  const respuesta = await fetch(
-    BASE_URL +
-      `/collection?limit=16&offset=${offset}&with_labels=1&fields=id,thumbnail,title,description&domain=${encodeURIComponent(domain)}`,
-  )
-  const datos = await respuesta.json()
-  return datos.items
-}
+
 export async function searchAdvanced(scope, searchText, filters, selectedOperator) {
   const children = []
 
@@ -126,12 +94,4 @@ export async function searchAdvanced(scope, searchText, filters, selectedOperato
   return data.items
 }
 
-export {
-  getCollections,
-  getRecords,
-  getRecordById,
-  getCollectionById,
-  getRecordsFromCollection,
-  searchCollections,
-  searchRecords,
-}
+export { getItem, getItemById, getRecordsFromCollection, searchItems }

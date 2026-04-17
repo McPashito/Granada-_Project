@@ -1,5 +1,5 @@
 <script>
-import { getCollectionById, getRecordsFromCollection } from '@/services/api'
+import { getItemById, getRecordsFromCollection } from '@/services/api'
 import { imageFormat } from '@/utils/imageFormat.js'
 import ItemCard from '@/components/ItemCard.vue'
 import DetailCard from '@/components/DetailCard.vue'
@@ -13,10 +13,11 @@ export default {
     return {
       collection: null,
       records: [],
+      entity: 'collection',
     }
   },
   async mounted() {
-    this.collection = await getCollectionById(this.$route.params.id)
+    this.collection = await getItemById(this.$route.params.id, this.entity)
     this.records = await getRecordsFromCollection({ collectionId: this.$route.params.id })
   },
   methods: {

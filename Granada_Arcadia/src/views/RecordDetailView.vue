@@ -1,5 +1,5 @@
 <script>
-import { getRecordById } from '@/services/api'
+import { getItemById } from '@/services/api'
 import { imageFormat } from '@/utils/imageFormat'
 import DetailCard from '@/components/DetailCard.vue'
 export default {
@@ -9,10 +9,11 @@ export default {
   data() {
     return {
       record: null,
+      entity: 'record',
     }
   },
   async mounted() {
-    this.record = await getRecordById(this.$route.params.id)
+    this.record = await getItemById(this.$route.params.id, this.entity)
   },
   methods: {
     imageFormat,
