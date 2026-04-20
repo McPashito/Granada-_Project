@@ -39,24 +39,27 @@ async function getRecordsFromCollection(params) {
   return datos.items
 }
 
-async function searchItems(search, offset, entity) {
+async function searchRecords(search, offset) {
   const domain = JSON.stringify({
-    op: 'and',
+    op: 'or',
     children: [
-      {
-        op: 'and',
-        children: [
-          {
-            type: 'text',
-            mode: 'fulltext',
-            value: search,
-          },
-        ],
-      },
+      { type: 'condition', field: 'title', operator: 'ilike', value: `%${search}%` },
+      { type: 'condition', field: 'author', operator: 'ilike', value: `%${search}%` },
     ],
   })
   const respuesta = await fetch(
-    BASE_URL + `/${entity}?limit=16&offset=${offset}&domain=${encodeURIComponent(domain)}`,
+    BASE_URL + `/record?limit=16&offset=${offset}&domain=${encodeURIComponent(domain)}`,
+  )
+  const datos = await respuesta.json()
+  return datos.items
+}
+async function searchCollections(search, offset) {
+  const domain = JSON.stringify({
+    op: 'or',
+    children: [{ type: 'condition', field: 'title', operator: 'ilike', value: `%${search}%` }],
+  })
+  const respuesta = await fetch(
+    BASE_URL + `/collection?limit=16&offset=${offset}&domain=${encodeURIComponent(domain)}`,
   )
   const datos = await respuesta.json()
   return datos.items
@@ -94,4 +97,4 @@ export async function searchAdvanced(scope, searchText, filters, selectedOperato
   return data.items
 }
 
-export { getItem, getItemById, getRecordsFromCollection, searchItems }
+export { getItem, getItemById, getRecordsFromCollection, searchRecords, searchCollections }

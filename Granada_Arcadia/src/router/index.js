@@ -47,5 +47,7 @@ const router = createRouter({
     },
   ],
 })
-
+router.afterEach((to) => {
+  document.title = to.meta.title || 'Licium Classic'
+})
 export default router

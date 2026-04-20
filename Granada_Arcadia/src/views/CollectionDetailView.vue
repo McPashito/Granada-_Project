@@ -27,21 +27,37 @@ export default {
 </script>
 
 <template>
-  <DetailCard
-    v-if="collection"
-    :image="collection?.thumbnail ? imageFormat(collection.thumbnail, 'large') : null"
-    :title="collection.title"
-    :date="collection.date"
-    :description="collection.description"
-  />
-
-  <section class="card-grid" v-if="records.length > 0">
-    <ItemCard
-      v-for="record in records"
-      :key="record.id"
-      :title="record.title || 'Sin título'"
-      :image="record.thumbnail || null"
-      :to="`/record/${record.id}`"
+  <section class="collection-detail">
+    <h1>Detalles de la coleccion "{{ collection?.title }}"</h1>
+    <DetailCard
+      v-if="collection"
+      :image="collection?.thumbnail ? imageFormat(collection.thumbnail, 'large') : null"
+      :title="collection.title"
+      :date="collection.date"
+      :description="collection.description"
     />
+    <h1>Registros incluidos en la coleccion "{{ collection?.title }}"</h1>
+
+    <section class="card-grid" v-if="records.length > 0">
+      <ItemCard
+        v-for="record in records"
+        :key="record.id"
+        :title="record.title || 'Sin título'"
+        :image="record.thumbnail || null"
+        :to="`/record/${record.id}`"
+      />
+    </section>
   </section>
 </template>
+<style>
+.collection-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  gap: 2rem;
+  padding: 2rem;
+}
+.collection-detail h1 {
+  font-size: 3rem;
+}
+</style>

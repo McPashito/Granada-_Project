@@ -2,7 +2,7 @@
 import ItemCard from '@/components/ItemCard.vue'
 import SearchSection from '@/components/SearchSection.vue'
 import PaginationComponent from '@/components/PaginationComponent.vue'
-import { getItem, searchItems } from '../services/api.js'
+import { getItem, searchCollections } from '../services/api.js'
 import SearchInfo from '@/components/SearchInfo.vue'
 
 export default {
@@ -30,7 +30,7 @@ export default {
     async loadMore() {
       this.offset += 16
       if (this.searchText.trim()) {
-        this.collections = await searchItems(this.searchText, this.offset, this.entity)
+        this.collections = await searchCollections(this.searchText, this.offset)
       } else {
         this.collections = await getItem(this.offset, this.entity)
       }
@@ -40,7 +40,7 @@ export default {
         this.offset -= 16
 
         if (this.searchText.trim()) {
-          this.collections = await searchItems(this.searchText, this.offset, this.entity)
+          this.collections = await searchCollections(this.searchText, this.offset)
         } else {
           this.collections = await getItem(this.offset, this.entity)
         }
@@ -60,7 +60,7 @@ export default {
           return
         } else {
           this.offset = 0
-          this.collections = await searchItems(this.searchText, this.offset, this.entity)
+          this.collections = await searchCollections(this.searchText, this.offset)
         }
       } catch (error) {
         console.error('Error searching collections:', error)
