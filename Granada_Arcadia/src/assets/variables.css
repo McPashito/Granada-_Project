@@ -16,6 +16,8 @@
   --home-overlay: rgba(0, 0, 0, 0.45);
   --home-card-bg: var(--gris);
   --home-card-text: var(--blanco);
+  --fuente-titulo: 'Libre Baskerville', serif;
+  --fuente-cuerpo: 'Nunito', sans-serif;
 }
 
 .light {

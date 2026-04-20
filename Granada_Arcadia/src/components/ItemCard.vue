@@ -80,7 +80,8 @@ defineProps({
   margin: 0;
   padding: 0 1rem;
   color: var(--blanco);
-  font-size: 1.6rem;
+  font-family: var(--fuente-titulo);
+  font-size: clamp(1rem, 2vw, 1.6rem);
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -106,7 +107,6 @@ defineProps({
   }
 
   .card h3 {
-    font-size: 1.45rem;
     padding: 0 0.9rem;
   }
 }
@@ -128,7 +128,6 @@ defineProps({
   }
 
   .card h3 {
-    font-size: 1.2rem;
     padding: 0 0.85rem;
   }
 }

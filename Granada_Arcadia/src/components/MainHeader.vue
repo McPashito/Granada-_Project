@@ -13,7 +13,19 @@ export default {
   methods: {
     toggleTheme() {
       document.body.classList.toggle('light')
+
+      const temaActual = document.body.classList.contains('light') ? 'light' : 'dark'
+      localStorage.setItem('theme', temaActual)
     },
+  },
+  mounted() {
+    const temaGuardado = localStorage.getItem('theme')
+
+    if (temaGuardado === 'light') {
+      document.body.classList.add('light')
+    } else if (temaGuardado === 'dark') {
+      document.body.classList.remove('light')
+    }
   },
 }
 </script>
@@ -73,7 +85,7 @@ export default {
   height: 9rem;
   display: flex;
   align-items: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--fuente-cuerpo);
   color: var(--blanco);
 }
 

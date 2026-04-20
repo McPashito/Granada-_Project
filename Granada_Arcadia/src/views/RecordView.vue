@@ -23,7 +23,30 @@ export default {
     }
   },
   async mounted() {
-    this.records = await getItem(this.offset, this.entity)
+    const query = this.$route.query.q
+
+    if (query) {
+      this.isLoading = true
+      try {
+        this.searchText = query
+        this.hasSearched = true
+        this.records = await searchRecords(query, this.offset)
+      } finally {
+        this.isLoading = false
+      }
+    } else {
+      this.records = await getItem(this.offset, this.entity)
+    }
+  },
+  watch: {
+    async '$route.query.q'(newQuery) {
+      if (!newQuery) {
+        this.searchText = ''
+        this.hasSearched = false
+        this.offset = 0
+        this.records = await getItem(this.offset, this.entity)
+      }
+    },
   },
   methods: {
     async loadMore() {
@@ -47,6 +70,14 @@ export default {
     },
     async handleSearch(searchText) {
       this.searchText = searchText
+
+      const query = searchText.trim()
+
+      if (query) {
+        this.$router.push({ query: { q: query } })
+      } else {
+        this.$router.push({ query: {} })
+      }
       if (this.isLoading) return
 
       this.isLoading = true

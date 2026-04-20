@@ -32,9 +32,9 @@ export default {
     <DetailCard
       v-if="collection"
       :image="collection?.thumbnail ? imageFormat(collection.thumbnail, 'large') : null"
-      :title="collection.title"
-      :date="collection.date"
-      :description="collection.description"
+      :title="collection.title || 'Sin título'"
+      :date="collection.date || 'Fecha desconocida'"
+      :description="collection.description || 'Sin descripción'"
     />
     <h1>Registros incluidos en la coleccion "{{ collection?.title }}"</h1>
 
@@ -56,6 +56,8 @@ export default {
   align-items: right;
   gap: 2rem;
   padding: 2rem;
+  font-family: var(--fuente-titulo);
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
 }
 .collection-detail h1 {
   font-size: 3rem;

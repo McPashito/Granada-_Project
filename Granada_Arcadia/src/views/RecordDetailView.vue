@@ -25,8 +25,8 @@ export default {
     v-if="record"
     :key="record.id"
     :image="record?.thumbnail ? imageFormat(record.thumbnail, 'large') : null"
-    :title="record.title"
-    :date="record.date"
-    :description="record.description"
+    :title="record.title || 'Sin título'"
+    :date="record.date || 'Fecha desconocida'"
+    :description="record.description || 'Sin descripción'"
   />
 </template>
