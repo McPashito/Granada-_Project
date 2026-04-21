@@ -94,21 +94,21 @@ export default {
 .main-footer {
   position: relative;
   background: var(--gradiente-fondo);
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: var(--blanco);
   height: 15rem;
 }
 
 .main-footer__toggle {
   display: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   padding: 0.4rem 0.6rem;
 }
 
 .main-footer__sections {
   display: flex;
   flex-direction: row;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 .main-footer__container.layout-container {
@@ -146,7 +146,7 @@ export default {
   text-decoration: none;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .main-footer {
     height: auto;
   }
@@ -194,19 +194,10 @@ export default {
   .main-footer__contact.nav-abierto {
     display: block;
   }
-}
 
-@media (max-width: 768px) {
   .main-footer__sections {
     flex-direction: column;
     gap: 0;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .main-footer__sections {
-    flex-direction: row;
-    gap: 3rem;
   }
 }
 </style>

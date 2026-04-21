@@ -27,13 +27,6 @@ defineProps({
   </div>
 </template>
 <style>
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4rem;
-  padding: 2rem 3rem;
-  justify-items: center;
-}
 .card {
   background-color: var(--oscuro);
   border-style: ridge;
@@ -90,13 +83,6 @@ defineProps({
   max-height: 3rem;
 }
 @media (min-width: 768px) and (max-width: 1026px) {
-  .card-grid {
-    grid-template-columns: repeat(2, minmax(300px, 340px));
-    justify-content: center;
-    gap: 1.75rem;
-    padding: 2rem 1rem;
-  }
-
   .card {
     width: 320px;
     height: 370px;
@@ -111,13 +97,6 @@ defineProps({
   }
 }
 @media (max-width: 767px) {
-  .card-grid {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 1.5rem;
-    padding: 1.5rem 1rem;
-  }
-
   .card {
     width: min(88vw, 320px);
     height: 320px;

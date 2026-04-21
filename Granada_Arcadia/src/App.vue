@@ -12,38 +12,15 @@ import MainHeader from './components/MainHeader.vue'
 </template>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 main {
   flex: 1;
   display: flex;
   align-items: center;
 }
-body {
-  background-color: #18181ad3;
-}
+
 #app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-.search-group {
-  margin: 1rem 0;
-  font-size: 1.5rem;
-}
-
-.search-input {
-  font-size: 1.5rem;
-}
-
-.search-btn {
-  font-size: 1.5rem;
-}
-
-.search-label {
-  font-size: 1rem;
 }
 </style>

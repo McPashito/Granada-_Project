@@ -30,3 +30,25 @@ defineProps({
     <p>Los parámetros de búsqueda que has introducido no produjeron ningún resultado</p>
   </div>
 </template>
+<style>
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--gris);
+  text-align: center;
+  padding: 4rem;
+}
+
+.empty-icon {
+  font-size: 3rem;
+}
+
+@media (min-width: 769px) and (max-width: 1025px) {
+}
+
+@media (max-width: 768px) {
+}
+</style>
