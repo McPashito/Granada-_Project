@@ -1,239 +1,670 @@
 <script>
-import BrandLogo from '@/components/BrandLogo.vue'
+import ItemCard from '@/components/ItemCard.vue'
+import { searchAdvanced } from '@/services/api'
 
 export default {
-  components: { BrandLogo },
+  components: {
+    ItemCard,
+  },
+  data() {
+    return {
+      quickQuery: '',
+      quickLoading: false,
+      hasQuickSearched: false,
+      quickRecordResults: [],
+      quickCollectionResults: [],
+      recordImage: '/api/core/attachment/action_get/thumb?attachment_id=746&size=small',
+      collectionImage: '/api/core/attachment/action_get/thumb?attachment_id=747&size=small',
+    }
+  },
+  methods: {
+    async handleQuickSearch() {
+      const query = this.quickQuery.trim()
+
+      this.hasQuickSearched = true
+
+      if (!query || this.quickLoading) {
+        this.quickRecordResults = []
+        this.quickCollectionResults = []
+        return
+      }
+
+      this.quickLoading = true
+
+      try {
+        const [records, collections] = await Promise.all([
+          searchAdvanced('records', query, [], 'and'),
+          searchAdvanced('collections', query, [], 'and'),
+        ])
+
+        this.quickRecordResults = records.slice(0, 3)
+        this.quickCollectionResults = collections.slice(0, 3)
+      } catch (error) {
+        console.error('Error en la búsqueda rápida de Home:', error)
+        this.quickRecordResults = []
+        this.quickCollectionResults = []
+      } finally {
+        this.quickLoading = false
+      }
+    },
+  },
 }
 </script>
 
 <template>
-  <section class="home-page">
-    <div class="home-overlay"></div>
-
-    <section class="home-content">
-      <div class="home-top">
-        <BrandLogo />
-      </div>
-
-      <header class="hero">
-        <p class="hero__eyebrow">Patrimonio cultural digital</p>
-        <h1>Explora obras y colecciones con una interfaz clara y cuidada</h1>
-        <p class="hero__text">
-          Licium Classic reúne registros y colecciones en un entorno visual limpio, pensado para
-          consultar información, relacionar piezas y navegar por el catálogo de forma sencilla.
+  <section class="landing">
+    <div class="landing__container layout-container">
+      <header class="landing__hero">
+        <p class="landing__brand">Licium Classic</p>
+        <p class="landing__eyebrow">Patrimonio cultural digital</p>
+        <h1 class="landing__title">Explora el catálogo sin rodeos</h1>
+        <p class="landing__text">
+          Consulta registros, descubre colecciones y localiza contenido desde una portada más clara,
+          más visual y más fácil de recorrer.
         </p>
       </header>
 
-      <section class="home-actions">
-        <RouterLink to="/record" class="home-card home-card--primary">
-          <span class="home-card__label">Explorar</span>
-          <h2>Registros</h2>
-          <p>
-            Accede a fichas individuales con información detallada sobre cada obra, sus
-            características y sus relaciones.
-          </p>
-        </RouterLink>
+      <section class="landing-section">
+        <div class="landing-section__heading">
+          <div>
+            <p class="landing-section__kicker">Acceso principal</p>
+            <h2>Registros</h2>
+            <p class="landing-section__description">
+              Fichas individuales con información detallada sobre obras, autores y relaciones.
+            </p>
+          </div>
 
-        <RouterLink to="/collection" class="home-card">
-          <span class="home-card__label">Descubrir</span>
-          <h2>Colecciones</h2>
-          <p>
-            Recorre agrupaciones temáticas e históricas para entender mejor el contexto y la
-            conexión entre piezas.
-          </p>
-        </RouterLink>
+          <RouterLink to="/record" class="landing-section__link">Ver registros</RouterLink>
+        </div>
+
+        <div class="showcase-grid">
+          <RouterLink to="/record" class="showcase-card showcase-card--record">
+            <div class="showcase-card__media">
+              <img
+                v-if="recordImage"
+                :src="recordImage"
+                alt="Imagen destacada de registro"
+                class="showcase-card__img"
+              />
+              <div
+                v-else
+                class="showcase-card__placeholder showcase-card__placeholder--record"
+              ></div>
+            </div>
+            <div class="showcase-card__content">
+              <span class="showcase-card__tag">Registro</span>
+              <h3>Consulta piezas y fichas individuales</h3>
+              <p>
+                Navega por entradas concretas, consulta información estructurada sobre cada obra,
+                explora sus relaciones y accede al catálogo de registros desde una entrada más clara
+                y directa.
+              </p>
+            </div>
+          </RouterLink>
+        </div>
       </section>
-    </section>
+
+      <section class="search-band">
+        <div class="search-band__text">
+          <p class="search-band__kicker">Búsqueda rápida</p>
+          <h2>Encuentra algo desde la portada</h2>
+          <p>
+            Introduce un término y te mostramos coincidencias rápidas de registros y colecciones sin
+            salir de la Home.
+          </p>
+        </div>
+
+        <form class="search-band__form" @submit.prevent="handleQuickSearch">
+          <input
+            v-model="quickQuery"
+            type="search"
+            class="search-band__input"
+            placeholder="Buscar por título, autor o término..."
+            enterkeyhint="search"
+            autocapitalize="none"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button type="submit" class="search-band__button" :disabled="quickLoading">
+            {{ quickLoading ? 'Buscando...' : 'Buscar' }}
+          </button>
+        </form>
+
+        <div v-if="hasQuickSearched" class="search-band__results">
+          <p
+            v-if="
+              !quickLoading &&
+              quickRecordResults.length === 0 &&
+              quickCollectionResults.length === 0
+            "
+            class="search-band__empty"
+          >
+            No se han encontrado coincidencias rápidas. Puedes probar con otro término o usar la
+            búsqueda avanzada.
+          </p>
+
+          <div v-if="quickRecordResults.length > 0" class="search-band__result-block">
+            <div class="search-band__result-head">
+              <h3>Registros</h3>
+              <RouterLink to="/record" class="search-band__mini-link">Ver todos</RouterLink>
+            </div>
+
+            <div class="search-band__grid">
+              <ItemCard
+                v-for="result in quickRecordResults"
+                :key="result.id"
+                :title="result.title"
+                :image="result.thumbnail || null"
+                :to="`/record/${result.id}`"
+              />
+            </div>
+          </div>
+
+          <div v-if="quickCollectionResults.length > 0" class="search-band__result-block">
+            <div class="search-band__result-head">
+              <h3>Colecciones</h3>
+              <RouterLink to="/collection" class="search-band__mini-link">Ver todas</RouterLink>
+            </div>
+
+            <div class="search-band__grid">
+              <ItemCard
+                v-for="result in quickCollectionResults"
+                :key="result.id"
+                :title="result.title"
+                :image="result.thumbnail || null"
+                :to="`/collection/${result.id}`"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="landing-section">
+        <div class="landing-section__heading">
+          <div>
+            <p class="landing-section__kicker">Contexto</p>
+            <h2>Colecciones</h2>
+            <p class="landing-section__description">
+              Agrupaciones temáticas e históricas para entender mejor la conexión entre piezas.
+            </p>
+          </div>
+
+          <RouterLink to="/collection" class="landing-section__link">Ver colecciones</RouterLink>
+        </div>
+
+        <div class="showcase-grid">
+          <RouterLink to="/collection" class="showcase-card showcase-card--collection">
+            <div class="showcase-card__media">
+              <img
+                v-if="collectionImage"
+                :src="collectionImage"
+                alt="Imagen destacada de colección"
+                class="showcase-card__img"
+              />
+              <div
+                v-else
+                class="showcase-card__placeholder showcase-card__placeholder--collection"
+              ></div>
+            </div>
+
+            <div class="showcase-card__content">
+              <span class="showcase-card__tag">Colección</span>
+              <h3>Recorridos temáticos</h3>
+              <p>
+                Explora agrupaciones que ordenan el contenido por contexto, afinidad y lectura, y
+                accede a una visión más amplia del catálogo sin depender solo de la navegación
+                individual.
+              </p>
+            </div>
+          </RouterLink>
+        </div>
+      </section>
+
+      <section class="advanced-cta">
+        <div>
+          <p class="advanced-cta__kicker">Más opciones</p>
+          <h2>Búsqueda avanzada</h2>
+          <p>
+            Si necesitas algo más preciso, puedes acceder al buscador avanzado y combinar filtros
+            específicos.
+          </p>
+        </div>
+
+        <RouterLink to="/search" class="advanced-cta__button">Ir a búsqueda avanzada</RouterLink>
+      </section>
+    </div>
   </section>
 </template>
 
 <style scoped>
 @import '@/assets/variables.css';
 
-.home-page {
-  position: relative;
-  min-height: 100vh;
-  padding: 3rem 1.5rem 4rem;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1600&q=80')
-      center / cover no-repeat;
-  overflow: hidden;
+.landing {
+  width: 100%;
+  padding: 4.5rem 0 6rem;
+  background: var(--fondo-general);
+  color: var(--texto-general);
 }
 
-.home-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.35));
-  pointer-events: none;
-}
-
-.home-content {
-  position: relative;
-  z-index: 1;
-  max-width: 1200px;
-  margin: 0 auto;
+.landing__container {
   display: grid;
-  gap: 2.5rem;
+  gap: 10rem;
 }
 
-.home-top {
-  display: flex;
-  justify-content: flex-start;
+.landing__hero {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 60rem;
 }
 
-.hero {
-  max-width: 760px;
-  padding: 2rem 2.25rem;
-  border-radius: 1.5rem;
-  background: rgba(20, 20, 20, 0.52);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
-}
-
-.hero__eyebrow {
-  margin: 0 0 0.75rem;
-  font-size: 0.95rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--primario);
-  font-weight: 700;
-}
-
-.hero h1 {
-  margin: 0 0 1rem;
-  font-family: var(--fuente-titulo);
-  font-size: clamp(2.2rem, 4vw, 4.25rem);
-  line-height: 1.1;
-  color: var(--blanco);
-}
-
-.hero__text {
+.landing__brand {
   margin: 0;
-  max-width: 60ch;
-  font-family: var(--fuente-cuerpo);
-  font-size: 1.15rem;
-  line-height: 1.7;
-  color: var(--blanco);
+  font-family: var(--fuente-titulo);
+  font-size: 2.35rem;
+  color: var(--dorado);
 }
 
-.home-actions {
+.landing__eyebrow {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dorado);
+}
+
+.landing__title {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: clamp(3rem, 5vw, 5.4rem);
+  line-height: 1.02;
+  color: var(--texto-general);
+}
+
+.landing__text {
+  margin: 0;
+  max-width: 52rem;
+  font-size: 1.22rem;
+  line-height: 1.9;
+  color: var(--texto-general);
+}
+
+.landing-section {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+}
+
+.landing-section__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
   gap: 1.5rem;
 }
 
-.home-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-  min-height: 260px;
-  padding: 2rem;
-  border-radius: 1.5rem;
+.landing-section__kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dorado);
+}
+
+.landing-section__heading h2 {
+  margin: 0 0 0.45rem;
+  font-family: var(--fuente-titulo);
+  font-size: 2.5rem;
+  color: var(--texto-general);
+}
+
+.landing-section__description {
+  margin: 0;
+  max-width: 44rem;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--texto-general);
+}
+
+.landing-section__link {
+  flex-shrink: 0;
+  padding: 0.9rem 1.15rem;
+  border: 1px solid var(--dorado);
+  border-radius: 999px;
+  color: var(--dorado);
   text-decoration: none;
-  color: var(--blanco);
-  background: rgba(90, 90, 90, 0.72);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-weight: 700;
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.showcase-card {
+  display: grid;
+  overflow: hidden;
+  border-radius: 1.2rem;
+  background: var(--superficie);
+  color: var(--texto-general);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   transition:
     transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+    box-shadow 0.2s ease;
 }
 
-.home-card:hover {
+.showcase-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.2);
-  background: rgba(105, 105, 105, 0.78);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
 }
 
-.home-card--primary {
-  background: rgba(110, 110, 110, 0.8);
+.showcase-card--record {
+  grid-template-columns: minmax(260px, 360px) 1fr;
+  min-height: 25rem;
 }
 
-.home-card__label {
-  display: inline-flex;
-  width: fit-content;
-  padding: 0.35rem 0.7rem;
-  border-radius: 999px;
+.showcase-card--collection {
+  grid-template-columns: minmax(260px, 360px) 1fr;
+  min-height: 22rem;
+}
+
+.showcase-card__media {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+.showcase-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.showcase-card__content {
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+.showcase-card__placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.showcase-card__placeholder--record {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 193, 7, 0.28), transparent 22%),
+    linear-gradient(135deg, rgba(255, 193, 7, 0.14), rgba(0, 151, 167, 0.1)),
+    linear-gradient(160deg, #232323, #3a3a3a);
+}
+.showcase-card__placeholder--collection {
+  background:
+    radial-gradient(circle at 75% 25%, rgba(255, 193, 7, 0.25), transparent 20%),
+    linear-gradient(140deg, rgba(0, 151, 167, 0.14), rgba(255, 193, 7, 0.08)),
+    linear-gradient(160deg, #2b2b2b, #404040);
+}
+
+.showcase-card__tag {
   font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: rgba(255, 193, 7, 0.16);
-  color: var(--primario);
+  color: var(--dorado);
 }
 
-.home-card h2 {
+.showcase-card__content h3 {
   margin: 0;
   font-family: var(--fuente-titulo);
-  font-size: 2rem;
+  font-size: 2.15rem;
   line-height: 1.15;
-  text-decoration: underline;
-  color: var(--blanco);
+  color: var(--texto-general);
 }
 
-.home-card p {
+.showcase-card__content p {
   margin: 0;
-  font-family: var(--fuente-cuerpo);
-  font-size: 1.15rem;
-  line-height: 1.65;
-  color: var(--blanco);
+  max-width: 52rem;
+  font-size: 1.08rem;
+  line-height: 1.85;
+  color: var(--texto-general);
+}
+
+.search-band {
+  display: grid;
+  gap: 1.75rem;
+  padding: 2.6rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.search-band__text {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.search-band__kicker {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dorado);
+}
+
+.search-band__text h2 {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: 2.35rem;
+  color: var(--texto-general);
+}
+
+.search-band__text p {
+  margin: 0;
+  max-width: 52rem;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--texto-general);
+}
+
+.search-band__form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.9rem;
+  align-items: center;
+  max-width: 56rem;
+}
+
+.search-band__input {
+  width: 100%;
+  padding: 1.05rem 1.1rem;
+  border-radius: 0.9rem;
+  border: 1px solid var(--gris);
+  background: var(--superficie);
+  color: var(--texto-general);
+  font-size: 1.06rem;
+}
+
+.search-band__button {
+  border: none;
+  border-radius: 0.9rem;
+  padding: 1.05rem 1.35rem;
+  background: var(--primario);
+  color: var(--oscuro);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.search-band__results {
+  display: grid;
+  gap: 2rem;
+  padding-top: 0.5rem;
+}
+
+.search-band__result-block {
+  display: grid;
+  gap: 1rem;
+}
+
+.search-band__result-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+}
+
+.search-band__result-head h3 {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: 1.8rem;
+  color: var(--texto-general);
+}
+
+.search-band__mini-link {
+  color: var(--dorado);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.search-band__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.search-band__empty {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--gris);
+}
+
+.advanced-cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 2.1rem;
+  border-radius: 1.2rem;
+  background: var(--superficie);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.advanced-cta__kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dorado);
+}
+
+.advanced-cta h2 {
+  margin: 0 0 0.45rem;
+  font-family: var(--fuente-titulo);
+  font-size: 2.2rem;
+  color: var(--texto-general);
+}
+
+.advanced-cta p {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--texto-general);
+}
+
+.advanced-cta__button {
+  flex-shrink: 0;
+  padding: 1rem 1.35rem;
+  border-radius: 0.9rem;
+  background: var(--primario);
+  color: var(--oscuro);
+  text-decoration: none;
+  font-weight: 700;
 }
 
 @media (max-width: 1024px) {
-  .home-page {
-    padding: 2rem 1.25rem 3rem;
+  .landing {
+    padding: 3.5rem 0 5rem;
   }
 
-  .hero {
-    max-width: 100%;
+  .landing__container {
+    gap: 4rem;
   }
 
-  .home-actions {
+  .showcase-card--record,
+  .showcase-card--collection {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
-  .home-card {
-    min-height: auto;
+  .showcase-card__media {
+    min-height: 220px;
+  }
+
+  .search-band__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .advanced-cta {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
 @media (max-width: 768px) {
-  .home-page {
-    padding: 1.5rem 1rem 2rem;
+  .landing {
+    padding: 2.5rem 0 3.5rem;
   }
 
-  .home-content {
-    gap: 1.5rem;
+  .landing__container {
+    gap: 3rem;
   }
 
-  .hero {
-    padding: 1.35rem 1.1rem;
-    border-radius: 1rem;
+  .landing__title {
+    font-size: 2.4rem;
   }
 
-  .hero__eyebrow {
-    font-size: 0.8rem;
-  }
-
-  .hero__text {
+  .landing__text,
+  .landing-section__description,
+  .search-band__text p,
+  .advanced-cta p,
+  .showcase-card__content p {
     font-size: 1rem;
-    line-height: 1.55;
+    line-height: 1.65;
   }
 
-  .home-card {
-    padding: 1.25rem 1rem;
-    border-radius: 1rem;
+  .landing-section__heading {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .home-card h2 {
-    font-size: 1.6rem;
+  .landing-section__heading h2,
+  .search-band__text h2,
+  .advanced-cta h2 {
+    font-size: 2rem;
   }
 
-  .home-card p {
-    font-size: 1rem;
-    line-height: 1.55;
+  .showcase-card__content {
+    padding: 1.4rem;
+  }
+
+  .showcase-card__content h3 {
+    font-size: 1.75rem;
+  }
+
+  .search-band__form {
+    grid-template-columns: 1fr;
+  }
+
+  .search-band__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .advanced-cta {
+    padding: 1.5rem;
   }
 }
 </style>
