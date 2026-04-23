@@ -2,7 +2,7 @@
 import ItemCard from '@/components/ItemCard.vue'
 import SearchSection from '@/components/SearchSection.vue'
 import PaginationComponent from '@/components/PaginationComponent.vue'
-import { getItem, searchCollections } from '../services/api.js'
+import { getItem, searchQuick } from '../services/api.js'
 import SearchInfo from '@/components/SearchInfo.vue'
 
 export default {
@@ -30,7 +30,7 @@ export default {
       try {
         this.searchText = query
         this.hasSearched = true
-        this.collections = await searchCollections(query, this.offset)
+        this.collections = await searchQuick(query, this.offset, this.entity)
       } finally {
         this.isLoading = false
       }
@@ -52,7 +52,7 @@ export default {
     async loadMore() {
       this.offset += 16
       if (this.searchText.trim()) {
-        this.collections = await searchCollections(this.searchText, this.offset)
+        this.collections = await searchQuick(this.searchText, this.offset, this.entity)
       } else {
         this.collections = await getItem(this.offset, this.entity)
       }
@@ -62,7 +62,7 @@ export default {
         this.offset -= 16
 
         if (this.searchText.trim()) {
-          this.collections = await searchCollections(this.searchText, this.offset)
+          this.collections = await searchQuick(this.searchText, this.offset, this.entity)
         } else {
           this.collections = await getItem(this.offset, this.entity)
         }
@@ -90,7 +90,7 @@ export default {
           return
         } else {
           this.offset = 0
-          this.collections = await searchCollections(this.searchText, this.offset)
+          this.collections = await searchQuick(this.searchText, this.offset, this.entity)
         }
       } catch (error) {
         console.error('Error searching collections:', error)

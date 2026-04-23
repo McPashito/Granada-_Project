@@ -190,7 +190,14 @@ export default {
     </section>
   </div>
 </template>
-<style>
+<style scoped>
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+  padding: 2rem 3rem;
+  justify-items: center;
+}
 .search-wrapper {
   display: flex;
   flex-direction: column;

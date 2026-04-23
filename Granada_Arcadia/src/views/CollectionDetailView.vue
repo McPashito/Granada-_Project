@@ -18,6 +18,9 @@ export default {
   },
   async mounted() {
     this.collection = await getItemById(this.$route.params.id, this.entity)
+
+    console.log(this.collection.canonical_joined_metadata)
+    console.log(this.collection.joined_metadata)
     this.records = await getRecordsFromCollection({ collectionId: this.$route.params.id })
   },
   methods: {
@@ -28,15 +31,25 @@ export default {
 
 <template>
   <section class="collection-detail">
-    <h1>Detalles de la coleccion "{{ collection?.title }}"</h1>
+    <h1>
+      Detalles de la coleccion "{{
+        collection?.canonical_joined_metadata?.title?.values?.[0]?.['@value']
+      }}"
+    </h1>
     <DetailCard
       v-if="collection"
       :image="collection?.thumbnail ? imageFormat(collection.thumbnail, 'large') : null"
-      :title="collection.title || 'Sin título'"
-      :date="collection.date || 'Fecha desconocida'"
-      :description="collection.description || 'Sin descripción'"
+      :title="collection?.canonical_joined_metadata?.title?.values?.[0]?.['@value'] || ''"
+      :date="collection?.canonical_joined_metadata?.date?.values?.[0]?.['@value'] || ''"
+      :description="
+        collection?.canonical_joined_metadata?.description?.values?.[0]?.['@value'] || ''
+      "
     />
-    <h1>Registros incluidos en la coleccion "{{ collection?.title }}"</h1>
+    <h1>
+      Registros incluidos en la coleccion "{{
+        collection?.canonical_joined_metadata?.title?.values?.[0]?.['@value']
+      }}"
+    </h1>
 
     <section class="card-grid" v-if="records.length > 0">
       <ItemCard

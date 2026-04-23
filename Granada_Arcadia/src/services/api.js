@@ -2,15 +2,16 @@ const BASE_URL = '/api/glam'
 
 async function getItem(offset = 0, entity) {
   const respuesta = await fetch(
-    BASE_URL +
-      `/${entity}?limit=16&offset=${offset}&with_labels=1&fields=id,thumbnail,title,description`,
+    BASE_URL + `/${entity}?limit=16&offset=${offset}&with_labels=1&fields=id,thumbnail,title`,
   )
   const datos = await respuesta.json()
   return datos.items
 }
-
 async function getItemById(id, entity) {
-  const respuesta = await fetch(BASE_URL + `/${entity}/${id}`)
+  const respuesta = await fetch(
+    BASE_URL +
+      `/${entity}/${id}?with_labels=1&fields=thumbnail,canonical_joined_metadata,joined_metadata`,
+  )
   const datos = await respuesta.json()
   return datos
 }
@@ -33,34 +34,30 @@ async function getRecordsFromCollection(params) {
     ],
   })
   const respuesta = await fetch(
-    BASE_URL + `/record?limit=24&offset=0&domain=${encodeURIComponent(domain)}`,
+    BASE_URL +
+      `/record?limit=24&offset=0&with_labels=1&fields=id,thumbnail,title&domain=${encodeURIComponent(domain)}`,
   )
   const datos = await respuesta.json()
   return datos.items
 }
+async function searchQuick(search, offset = 0, entity) {
+  const children =
+    entity === 'record'
+      ? [
+          { type: 'condition', field: 'title', operator: 'ilike', value: `%${search}%` },
+          { type: 'condition', field: 'author', operator: 'ilike', value: `%${search}%` },
+        ]
+      : [{ type: 'condition', field: 'title', operator: 'ilike', value: `%${search}%` }]
 
-async function searchRecords(search, offset) {
   const domain = JSON.stringify({
     op: 'or',
-    children: [
-      { type: 'condition', field: 'title', operator: 'ilike', value: `%${search}%` },
-      { type: 'condition', field: 'author', operator: 'ilike', value: `%${search}%` },
-    ],
+    children,
   })
+
   const respuesta = await fetch(
-    BASE_URL + `/record?limit=16&offset=${offset}&domain=${encodeURIComponent(domain)}`,
+    `${BASE_URL}/${entity}?limit=16&offset=${offset}&domain=${encodeURIComponent(domain)}`,
   )
-  const datos = await respuesta.json()
-  return datos.items
-}
-async function searchCollections(search, offset) {
-  const domain = JSON.stringify({
-    op: 'or',
-    children: [{ type: 'condition', field: 'title', operator: 'ilike', value: `%${search}%` }],
-  })
-  const respuesta = await fetch(
-    BASE_URL + `/collection?limit=16&offset=${offset}&domain=${encodeURIComponent(domain)}`,
-  )
+
   const datos = await respuesta.json()
   return datos.items
 }
@@ -97,4 +94,4 @@ export async function searchAdvanced(scope, searchText, filters, selectedOperato
   return data.items
 }
 
-export { getItem, getItemById, getRecordsFromCollection, searchRecords, searchCollections }
+export { getItem, getItemById, getRecordsFromCollection, searchQuick }

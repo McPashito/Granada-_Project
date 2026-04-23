@@ -28,6 +28,13 @@ function handleSearch() {
 </template>
 
 <style scoped>
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+  padding: 2rem 3rem;
+  justify-items: center;
+}
 .search-section {
   margin: 3rem 0;
   max-width: 80%;
