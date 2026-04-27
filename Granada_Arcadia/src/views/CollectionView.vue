@@ -4,6 +4,8 @@ import SearchSection from '@/components/SearchSection.vue'
 import PaginationComponent from '@/components/PaginationComponent.vue'
 import { getItem, searchQuick } from '../services/api.js'
 import SearchInfo from '@/components/SearchInfo.vue'
+import ItemCardList from '@/components/ItemCardList.vue'
+import ChangingBar from '@/components/ChangingBar.vue'
 
 export default {
   components: {
@@ -11,6 +13,8 @@ export default {
     ItemCard,
     PaginationComponent,
     SearchInfo,
+    ItemCardList,
+    ChangingBar,
   },
   data() {
     return {
@@ -20,6 +24,7 @@ export default {
       searchText: '',
       hasSearched: false,
       isLoading: false,
+      view: 'grid',
     }
   },
 
@@ -99,28 +104,42 @@ export default {
         this.isLoading = false
       }
     },
+    setView(view) {
+      this.view = view
+    },
   },
 }
 </script>
 
 <template>
   <SearchSection @search="handleSearch" />
-  <SearchInfo
-    v-if="hasSearched"
-    :results="collections"
-    :isLoading="isLoading"
-    :hasSearched="hasSearched"
-  />
-
-  <section class="card-grid" v-if="collections.length > 0">
-    <ItemCard
-      v-for="collection in collections"
-      :key="collection.id"
-      :title="collection.title"
-      :image="collection.thumbnail || null"
-      :to="`/collection/${collection.id}`"
+  <div class="collection-layout">
+    <ChangingBar :active-view="view" @change-view="setView" />
+    <SearchInfo
+      v-if="hasSearched"
+      :results="collections"
+      :isLoading="isLoading"
+      :hasSearched="hasSearched"
     />
-  </section>
+    <section class="card-grid" v-if="collections.length > 0 && view === 'grid'">
+      <ItemCard
+        v-for="collection in collections"
+        :key="collection.id"
+        :title="collection.title"
+        :image="collection.thumbnail || null"
+        :to="`/collection/${collection.id}`"
+      />
+    </section>
+    <section class="card-list" v-if="collections.length > 0 && view === 'list'">
+      <ItemCardList
+        v-for="collection in collections"
+        :key="collection.id"
+        :title="collection.title"
+        :image="collection.thumbnail || null"
+        :to="`/collection/${collection.id}`"
+      />
+    </section>
+  </div>
   <PaginationComponent
     :offset="offset"
     :itemsLength="collections.length"
@@ -128,3 +147,39 @@ export default {
     @next="loadMore"
   />
 </template>
+
+<style>
+.collection-layout {
+  width: min(34rem, 100%);
+  margin: 1.25rem 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.collection-layout .card-grid {
+  width: 100%;
+  margin: 0;
+}
+
+.card-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .collection-layout {
+    width: 92%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1026px) {
+  .collection-layout {
+    width: min(22rem, 100%);
+  }
+}
+</style>

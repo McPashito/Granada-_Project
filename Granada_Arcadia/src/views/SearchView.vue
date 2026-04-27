@@ -454,6 +454,10 @@ export default {
     gap: 1.5rem;
   }
 
+  .search-input-row {
+    grid-template-columns: minmax(0, 1fr) 8rem;
+  }
+
   .search-title {
     font-size: 1rem;
     letter-spacing: 0.1rem;
@@ -488,7 +492,7 @@ export default {
     border-radius: 0.4rem;
     font-size: 1rem;
     min-height: 44px;
-    min-width: 140px;
+    min-width: 0;
   }
 
   .filter-remove {
