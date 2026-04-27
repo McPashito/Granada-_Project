@@ -120,29 +120,31 @@ export default {
     :isLoading="isLoading"
     :hasSearched="hasSearched"
   />
-  <section class="changing-bar-container">
-    <button class="button" @click="viewGrid">GRID</button>
-    <button class="button" @click="viewList">LIST</button>
-  </section>
-  <section class="card-grid" v-if="records.length > 0 && view === 'grid'">
-    <ItemCard
-      v-for="record in records"
-      :key="record.id"
-      :title="record.title || 'Sin título'"
-      :image="record.thumbnail || null"
-      :to="`/record/${record.id}`"
-    />
-  </section>
-  <section class="card-list" v-if="records.length > 0 && view === 'list'">
-    <ItemCardList
-      v-for="record in records"
-      :key="record.id"
-      :title="record.title || 'Sin título'"
-      :image="record.thumbnail || null"
-      :to="`/record/${record.id}`"
-      :author="record.author || ''"
-    />
-  </section>
+  <div class="record-layout">
+    <section class="changing-bar-container">
+      <button class="button" @click="viewGrid">GRID</button>
+      <button class="button" @click="viewList">LIST</button>
+    </section>
+    <section class="card-grid" v-if="records.length > 0 && view === 'grid'">
+      <ItemCard
+        v-for="record in records"
+        :key="record.id"
+        :title="record.title || 'Sin título'"
+        :image="record.thumbnail || null"
+        :to="`/record/${record.id}`"
+      />
+    </section>
+    <section class="card-list" v-if="records.length > 0 && view === 'list'">
+      <ItemCardList
+        v-for="record in records"
+        :key="record.id"
+        :title="record.title || 'Sin título'"
+        :image="record.thumbnail || null"
+        :to="`/record/${record.id}`"
+        :author="record.author || ''"
+      />
+    </section>
+  </div>
 
   <PaginationComponent
     :offset="offset"
@@ -151,9 +153,18 @@ export default {
     @next="loadMore"
   />
 </template>
+
 <style>
-.changing-bar-container {
+.record-layout {
   width: min(34rem, 100%);
+  margin: 1.25rem 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.changing-bar-container {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -163,7 +174,7 @@ export default {
   background-color: var(--superficie);
   padding: 0.1rem;
   gap: 0.22rem;
-  margin: 0 auto 0.35rem;
+  margin: 0;
 }
 
 .button {
@@ -176,14 +187,28 @@ export default {
   margin: 0;
 }
 
+.record-layout .card-grid {
+  width: 100%;
+  margin: 0;
+}
+
+.card-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+  margin: 0;
+}
+
 @media (max-width: 767px) {
-  .changing-bar-container {
+  .record-layout {
     width: 92%;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1026px) {
-  .changing-bar-container {
+  .record-layout {
     width: min(22rem, 100%);
   }
 }

@@ -26,36 +26,34 @@ defineProps({
     </div>
     <div class="card-content">
       <h3 class="card-title">{{ title }}</h3>
-      <p v-if="author" class="card-author">{{ author }}</p>
+      <p v-if="author" class="card-author">Autor: {{ author }}</p>
     </div>
   </router-link>
 </template>
 <style scoped>
 .cardList {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-items: center;
+  justify-content: flex-start;
   text-decoration: none;
   color: inherit;
-
-  border-radius: 4px;
   background-color: var(--gris);
+  border-color: none;
+  border-radius: 4px;
 
-  border-color: var(--dorado);
-
-  width: 300px;
-  height: 100px;
+  width: 100%;
+  max-width: 100%;
+  height: 70px;
   overflow: hidden;
-  border-style: ridge;
+  box-sizing: border-box;
+  align-self: stretch;
 }
 
 .card-image-box {
-  width: 30%;
+  width: 20%;
   height: 100%;
   background-color: var(--superficie);
-  border-radius: 4px;
-  overflow: hidden;
+
   flex-shrink: 0;
 }
 .card-image {
@@ -66,25 +64,29 @@ defineProps({
 }
 
 .card-content {
+  flex: 1;
+  height: 100%;
+  padding-left: 8px;
   display: flex;
-  padding: 0 0 0 3px;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
-  background-color: var(--gris);
-  text-align: center;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
   overflow: hidden;
-  line-height: 1.15;
+  background-color: var(--gris);
+  min-width: 0;
 }
 
 .card-title {
-  font-size: 1rem;
+  font-size: 12px;
   margin-bottom: 8px;
+
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .card-author {
-  font-size: 0.9em;
+  font-size: 10px;
 }
 </style>
