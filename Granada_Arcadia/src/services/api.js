@@ -2,7 +2,8 @@ const BASE_URL = '/api/glam'
 
 async function getItem(offset = 0, entity) {
   const respuesta = await fetch(
-    BASE_URL + `/${entity}?limit=16&offset=${offset}&with_labels=1&fields=id,thumbnail,title`,
+    BASE_URL +
+      `/${entity}?limit=16&offset=${offset}&with_labels=1&fields=id,thumbnail,title,author`,
   )
   const datos = await respuesta.json()
   return datos.items
