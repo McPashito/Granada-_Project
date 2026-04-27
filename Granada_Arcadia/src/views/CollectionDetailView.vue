@@ -67,12 +67,12 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: right;
-  gap: 2rem;
-  padding: 2rem;
+  gap: 1rem;
+  padding: 1rem;
   font-family: var(--fuente-titulo);
-  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  font-size: clamp(1rem, 2vw, 1.35rem);
 }
 .collection-detail h1 {
-  font-size: 3rem;
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
 }
 </style>

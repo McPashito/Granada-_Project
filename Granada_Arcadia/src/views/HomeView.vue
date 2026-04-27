@@ -241,32 +241,32 @@ export default {
 
 .landing {
   width: 100%;
-  padding: 4.5rem 0 6rem;
+  padding: 2.5rem 0 3.5rem;
   background: var(--fondo-general);
   color: var(--texto-general);
 }
 
 .landing__container {
   display: grid;
-  gap: 10rem;
+  gap: 3rem;
 }
 
 .landing__hero {
   display: grid;
-  gap: 1.1rem;
-  max-width: 60rem;
+  gap: 0.75rem;
+  max-width: 46rem;
 }
 
 .landing__brand {
   margin: 0;
   font-family: var(--fuente-titulo);
-  font-size: 2.35rem;
+  font-size: 1.7rem;
   color: var(--dorado);
 }
 
 .landing__eyebrow {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -276,34 +276,34 @@ export default {
 .landing__title {
   margin: 0;
   font-family: var(--fuente-titulo);
-  font-size: clamp(3rem, 5vw, 5.4rem);
-  line-height: 1.02;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.08;
   color: var(--texto-general);
 }
 
 .landing__text {
   margin: 0;
-  max-width: 52rem;
-  font-size: 1.22rem;
-  line-height: 1.9;
+  max-width: 40rem;
+  font-size: 0.92rem;
+  line-height: 1.65;
   color: var(--texto-general);
 }
 
 .landing-section {
   display: grid;
-  gap: 1.75rem;
+  gap: 1rem;
 }
 
 .landing-section__heading {
   display: flex;
   justify-content: space-between;
   align-items: end;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .landing-section__kicker {
-  margin: 0 0 0.35rem;
-  font-size: 0.88rem;
+  margin: 0 0 0.25rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -311,23 +311,23 @@ export default {
 }
 
 .landing-section__heading h2 {
-  margin: 0 0 0.45rem;
+  margin: 0 0 0.25rem;
   font-family: var(--fuente-titulo);
-  font-size: 2.5rem;
+  font-size: 1.6rem;
   color: var(--texto-general);
 }
 
 .landing-section__description {
   margin: 0;
-  max-width: 44rem;
-  font-size: 1.08rem;
-  line-height: 1.75;
+  max-width: 34rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
   color: var(--texto-general);
 }
 
 .landing-section__link {
   flex-shrink: 0;
-  padding: 0.9rem 1.15rem;
+  padding: 0.55rem 0.8rem;
   border: 1px solid var(--dorado);
   border-radius: 999px;
   color: var(--dorado);
@@ -338,13 +338,13 @@ export default {
 .showcase-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 0.9rem;
 }
 
 .showcase-card {
   display: grid;
   overflow: hidden;
-  border-radius: 1.2rem;
+  border-radius: 0.8rem;
   background: var(--superficie);
   color: var(--texto-general);
   text-decoration: none;
@@ -360,13 +360,13 @@ export default {
 }
 
 .showcase-card--record {
-  grid-template-columns: minmax(260px, 360px) 1fr;
-  min-height: 25rem;
+  grid-template-columns: minmax(180px, 260px) 1fr;
+  min-height: 16rem;
 }
 
 .showcase-card--collection {
-  grid-template-columns: minmax(260px, 360px) 1fr;
-  min-height: 22rem;
+  grid-template-columns: minmax(180px, 260px) 1fr;
+  min-height: 14rem;
 }
 
 .showcase-card__media {
@@ -385,8 +385,8 @@ export default {
 .showcase-card__content {
   display: grid;
   align-content: center;
-  gap: 1rem;
-  padding: 2rem;
+  gap: 0.65rem;
+  padding: 1.15rem;
 }
 .showcase-card__placeholder {
   width: 100%;
@@ -407,7 +407,7 @@ export default {
 }
 
 .showcase-card__tag {
-  font-size: 0.82rem;
+  font-size: 0.64rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -417,35 +417,35 @@ export default {
 .showcase-card__content h3 {
   margin: 0;
   font-family: var(--fuente-titulo);
-  font-size: 2.15rem;
-  line-height: 1.15;
+  font-size: 1.35rem;
+  line-height: 1.2;
   color: var(--texto-general);
 }
 
 .showcase-card__content p {
   margin: 0;
-  max-width: 52rem;
-  font-size: 1.08rem;
-  line-height: 1.85;
+  max-width: 38rem;
+  font-size: 0.84rem;
+  line-height: 1.6;
   color: var(--texto-general);
 }
 
 .search-band {
   display: grid;
-  gap: 1.75rem;
-  padding: 2.6rem 0;
+  gap: 1rem;
+  padding: 1.5rem 0;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .search-band__text {
   display: grid;
-  gap: 0.55rem;
+  gap: 0.35rem;
 }
 
 .search-band__kicker {
   margin: 0;
-  font-size: 0.88rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -455,56 +455,56 @@ export default {
 .search-band__text h2 {
   margin: 0;
   font-family: var(--fuente-titulo);
-  font-size: 2.35rem;
+  font-size: 1.55rem;
   color: var(--texto-general);
 }
 
 .search-band__text p {
   margin: 0;
-  max-width: 52rem;
-  font-size: 1.08rem;
-  line-height: 1.75;
+  max-width: 38rem;
+  font-size: 0.84rem;
+  line-height: 1.55;
   color: var(--texto-general);
 }
 
 .search-band__form {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.9rem;
+  gap: 0.5rem;
   align-items: center;
-  max-width: 56rem;
+  max-width: 36rem;
 }
 
 .search-band__input {
   width: 100%;
-  padding: 1.05rem 1.1rem;
-  border-radius: 0.9rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.5rem;
   border: 1px solid var(--gris);
   background: var(--superficie);
   color: var(--texto-general);
-  font-size: 1.06rem;
+  font-size: 0.82rem;
 }
 
 .search-band__button {
   border: none;
-  border-radius: 0.9rem;
-  padding: 1.05rem 1.35rem;
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.85rem;
   background: var(--primario);
   color: var(--oscuro);
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
 }
 
 .search-band__results {
   display: grid;
-  gap: 2rem;
-  padding-top: 0.5rem;
+  gap: 1rem;
+  padding-top: 0.25rem;
 }
 
 .search-band__result-block {
   display: grid;
-  gap: 1rem;
+  gap: 0.6rem;
 }
 
 .search-band__result-head {
@@ -517,7 +517,7 @@ export default {
 .search-band__result-head h3 {
   margin: 0;
   font-family: var(--fuente-titulo);
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   color: var(--texto-general);
 }
 
@@ -529,14 +529,15 @@ export default {
 
 .search-band__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(3, 8rem);
+  gap: 0.6rem;
+  justify-content: start;
 }
 
 .search-band__empty {
   margin: 0;
-  font-size: 1.02rem;
-  line-height: 1.7;
+  font-size: 0.82rem;
+  line-height: 1.55;
   color: var(--gris);
 }
 
@@ -544,16 +545,16 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
-  padding: 2rem 2.1rem;
-  border-radius: 1.2rem;
+  gap: 1rem;
+  padding: 1.2rem 1.35rem;
+  border-radius: 0.8rem;
   background: var(--superficie);
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .advanced-cta__kicker {
-  margin: 0 0 0.35rem;
-  font-size: 0.88rem;
+  margin: 0 0 0.25rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -561,24 +562,24 @@ export default {
 }
 
 .advanced-cta h2 {
-  margin: 0 0 0.45rem;
+  margin: 0 0 0.25rem;
   font-family: var(--fuente-titulo);
-  font-size: 2.2rem;
+  font-size: 1.45rem;
   color: var(--texto-general);
 }
 
 .advanced-cta p {
   margin: 0;
-  max-width: 46rem;
-  font-size: 1.08rem;
-  line-height: 1.75;
+  max-width: 34rem;
+  font-size: 0.84rem;
+  line-height: 1.55;
   color: var(--texto-general);
 }
 
 .advanced-cta__button {
   flex-shrink: 0;
-  padding: 1rem 1.35rem;
-  border-radius: 0.9rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.5rem;
   background: var(--primario);
   color: var(--oscuro);
   text-decoration: none;
