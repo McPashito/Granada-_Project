@@ -33,50 +33,50 @@ defineProps({
 <style>
 .details {
   width: 100%;
-  max-width: 1024px;
+  max-width: 720px;
   display: grid;
   grid-template-columns: 40fr 60fr;
   color: var(--blanco);
   align-items: center;
   background-color: var(--superficie);
-  border-radius: 1rem;
-  gap: 1.5rem;
+  border-radius: 0.7rem;
+  gap: 1rem;
 
-  padding: 1.5rem;
-  margin: 2rem;
+  padding: 1rem;
+  margin: 1rem;
 }
 .details h3:first-child {
   font-family: var(--fuente-titulo);
-  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  font-size: clamp(1rem, 2vw, 1.25rem);
   color: var(--blanco);
 }
 .details-img {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 400px;
-  width: 400px;
-  border-radius: 1rem;
+  height: 260px;
+  width: 260px;
+  border-radius: 0.7rem;
 }
 .details-img img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
-  border-radius: 1rem;
+  border-radius: 0.7rem;
 }
 
 .details-description h3 {
   font-family: var(--fuente-titulo);
-  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-size: clamp(0.82rem, 1.5vw, 1rem);
   color: var(--gris);
   font-weight: 400;
 }
 
 .details-description h2 {
   font-family: var(--fuente-cuerpo);
-  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-  line-height: 1.7;
+  font-size: clamp(0.78rem, 1.2vw, 0.9rem);
+  line-height: 1.55;
   font-weight: 400;
 }
 
@@ -84,9 +84,9 @@ defineProps({
   .details {
     display: flex;
     flex-direction: column;
-    margin: 1.2rem auto;
-    max-width: 90%;
+    margin: 0.8rem auto;
     max-width: 95%;
+    padding: 0.85rem;
   }
   .details-img {
     height: auto;

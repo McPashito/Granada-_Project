@@ -31,10 +31,10 @@ defineProps({
   background-color: var(--oscuro);
   border-style: ridge;
   border-color: var(--dorado);
-  border-radius: 1rem;
+  border-radius: 0.4rem;
   overflow: hidden;
-  width: 400px;
-  height: 450px;
+  width: 8rem;
+  height: 10.5rem;
   display: flex;
   flex-direction: column;
 }
@@ -57,7 +57,7 @@ defineProps({
 
 .card-image {
   width: 100%;
-  height: 75%;
+  height: 7.6rem;
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -71,43 +71,46 @@ defineProps({
 
 .card h3 {
   margin: 0;
-  padding: 0 1rem;
+  padding: 0 0.45rem;
   color: var(--blanco);
   font-family: var(--fuente-titulo);
-  font-size: clamp(1rem, 2vw, 1.6rem);
+  font-size: 0.68rem;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  line-height: 1.3;
-  max-height: 3rem;
+  line-height: 1.15;
 }
+
 @media (min-width: 768px) and (max-width: 1026px) {
   .card {
-    width: 320px;
-    height: 370px;
+    width: 10rem;
+    height: 13rem;
   }
 
   .card-image {
-    height: 265px;
+    height: 9.5rem;
   }
 
   .card h3 {
-    padding: 0 0.9rem;
+    font-size: 0.75rem;
+    padding: 0 0.55rem;
   }
 }
+
 @media (max-width: 767px) {
   .card {
-    width: min(88vw, 320px);
-    height: 320px;
+    width: min(82vw, 14rem);
+    height: 16rem;
   }
 
   .card-image {
-    height: 220px;
+    height: 12rem;
   }
 
   .card h3 {
-    padding: 0 0.85rem;
+    font-size: 0.8rem;
+    padding: 0 0.55rem;
   }
 }
 </style>
