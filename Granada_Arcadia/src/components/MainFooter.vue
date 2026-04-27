@@ -87,42 +87,42 @@ export default {
   position: absolute;
   left: 0;
   width: 100%;
-  height: 0.5rem;
+  height: 0.18rem;
   background: var(--gradiente-dorado);
 }
 
 .main-footer {
   position: relative;
   background: var(--gradiente-fondo);
-  font-size: 1.2rem;
+  font-size: 0.85rem;
   color: var(--blanco);
-  height: 15rem;
+  height: 8.25rem;
 }
 
 .main-footer__toggle {
   display: none;
-  font-size: 1rem;
-  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.45rem;
 }
 
 .main-footer__sections {
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .main-footer__container.layout-container {
   display: grid;
   height: 100%;
   align-items: center;
-  grid-template-columns: 40% auto auto auto;
+  grid-template-columns: 32% auto auto auto;
   justify-content: space-evenly;
 }
 
 .main-footer__container.layout-container p {
   font-weight: bold;
   text-decoration: underline;
-  margin-bottom: 10px;
+  margin-bottom: 0.35rem;
 }
 
 .main-footer__menu ul,
@@ -136,7 +136,7 @@ export default {
 .main-footer__menu ul li,
 .main-footer__about ul li,
 .main-footer__contact ul li {
-  margin-bottom: 10px;
+  margin-bottom: 0.35rem;
 }
 
 .main-footer__menu ul li a,
@@ -146,16 +146,17 @@ export default {
   text-decoration: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .main-footer {
     height: auto;
+    font-size: 0.85rem;
   }
 
   .main-footer__container.layout-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 0.75rem 1rem;
   }
 
   .main-footer__container.layout-container p {
@@ -167,10 +168,10 @@ export default {
     background: none;
     border: none;
     color: var(--blanco);
-    font-size: 1rem;
+    font-size: 0.85rem;
     cursor: pointer;
     text-align: left;
-    padding: 0.3rem 0;
+    padding: 0.25rem 0;
   }
 
   .main-footer__menu,
@@ -185,8 +186,8 @@ export default {
   .main-footer__menu a,
   .main-footer__about a,
   .main-footer__contact a {
-    font-size: 1rem;
-    margin: 0.3rem 0;
+    font-size: 0.85rem;
+    margin: 0.25rem 0;
   }
 
   .main-footer__menu.nav-abierto,

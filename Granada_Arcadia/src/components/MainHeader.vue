@@ -68,7 +68,7 @@ export default {
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 0.5rem;
+  height: 0.18rem;
   background: var(--gradiente-dorado);
 }
 
@@ -77,12 +77,12 @@ export default {
   background: var(--gradiente-fondo);
   color: var(--blanco);
   padding: 0;
-  height: 9rem;
+  height: 3.75rem;
 }
 
 .main-header__container.layout-container {
   justify-content: space-between;
-  height: 9rem;
+  height: 3.75rem;
   display: flex;
   align-items: center;
   font-family: var(--fuente-cuerpo);
@@ -92,7 +92,7 @@ export default {
 .main-header__list {
   display: flex;
   justify-content: center;
-  gap: 3rem;
+  gap: 1.1rem;
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -101,44 +101,46 @@ export default {
 .main-header__link {
   text-decoration: none;
   color: var(--blanco);
-  font-size: 2rem;
+  font-size: 0.9rem;
   font-weight: bold;
-  padding: 0.8rem;
+  padding: 0.3rem 0.45rem;
 }
 
 .main-header__link:hover {
   color: var(--oscuro);
   background-color: var(--dorado);
   text-decoration: underline;
-  padding: 0.8rem;
-  border-radius: 0.8rem;
+  padding: 0.3rem 0.45rem;
+  border-radius: 0.4rem;
 }
 
 .main-header__toggle {
   display: none;
 }
+
 .main-header__theme {
   background: var(--superficie);
   color: var(--blanco);
   border: none;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  padding: 0.28rem 0.55rem;
   cursor: pointer;
-  margin-left: 1rem;
+  margin-left: 0.75rem;
+  font-size: 0.8rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .main-header {
     margin: 0;
     overflow: hidden;
     height: auto;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.35rem;
   }
 
   .main-header__container.layout-container {
     height: auto;
     flex-wrap: wrap;
-    padding: 0.8rem 1rem;
+    padding: 0.6rem 0.8rem;
     width: 100%;
   }
 
@@ -147,7 +149,7 @@ export default {
     background: none;
     border: none;
     color: var(--blanco);
-    font-size: 2rem;
+    font-size: 1.4rem;
     cursor: pointer;
     margin-left: auto;
   }
@@ -163,25 +165,36 @@ export default {
 
   .main-header__list {
     flex-direction: column;
-    gap: 1rem;
-    padding: 0.5rem 0;
+    gap: 0.55rem;
+    padding: 0.4rem 0;
   }
 
   .main-header__link {
-    padding: 0.4rem 0;
-    font-size: 1rem;
+    padding: 0.3rem 0;
+    font-size: 0.9rem;
   }
+
   .main-header__link:hover {
     background-color: transparent;
   }
 }
+
 @media (min-width: 768px) and (max-width: 1025px) {
-  .main-header__list {
-    gap: 1.25rem;
+  .main-header {
+    height: 3.5rem;
   }
+
+  .main-header__container.layout-container {
+    height: 3.5rem;
+  }
+
+  .main-header__list {
+    gap: 0.9rem;
+  }
+
   .main-header__link {
-    padding: 0.2rem;
-    font-size: 1.25rem;
+    padding: 0.2rem 0.35rem;
+    font-size: 0.85rem;
   }
 }
 </style>
