@@ -76,7 +76,7 @@ export default {
     async handleSearch(searchText) {
       this.searchText = searchText
 
-      const query = searchText.trim()
+      const query = searchText.trim() /*jjj*/
 
       if (query) {
         this.$router.push({ query: { q: query } })
