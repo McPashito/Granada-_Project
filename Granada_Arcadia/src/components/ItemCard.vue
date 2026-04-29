@@ -28,9 +28,8 @@ defineProps({
 </template>
 <style>
 .card {
-  background-color: var(--oscuro);
-  border-style: ridge;
-  border-color: var(--dorado);
+  background-color: var(--superficie);
+
   border-radius: 0.4rem;
   overflow: hidden;
   width: 8rem;
@@ -48,11 +47,11 @@ defineProps({
 }
 
 .card-content {
-  background-color: var(--gris);
+  background-color: var(--superficie);
   flex: 1;
   display: flex;
   align-items: center;
-  border-top: 0.2px solid var(--dorado);
+  border-top: 0.2px solid var(--gris-claro);
 }
 
 .card-image {

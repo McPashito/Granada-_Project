@@ -18,86 +18,142 @@ defineProps({
   },
 })
 </script>
+
 <template>
-  <section class="details">
-    <div class="details-img">
-      <img v-if="image" :src="image" alt="title" />
+  <section class="detail-card">
+    <div class="detail-card__media">
+      <img v-if="image" :src="image" :alt="title" :title="title" />
     </div>
-    <div class="details-description">
-      <h3>Título: {{ title }}</h3>
-      <h3>Fecha: {{ date }}</h3>
-      <h2>Descripcion: {{ description }}</h2>
+
+    <div class="detail-card__body">
+      <p class="detail-card__eyebrow">Registro</p>
+
+      <div class="detail-card__content">
+        <div class="detail-row">
+          <span class="detail-label">Titulo:</span>
+          <span class="detail-value detail-value--title">{{ title }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Fecha:</span>
+          <span class="detail-value">{{ date || 'Sin fecha' }}</span>
+        </div>
+
+        <div class="detail-row detail-row--description">
+          <span class="detail-label">Descripcion:</span>
+          <span class="detail-value detail-value--description">
+            {{ description || 'Sin descripcion' }}
+          </span>
+        </div>
+      </div>
     </div>
   </section>
 </template>
-<style>
-.details {
-  width: 100%;
-  max-width: 720px;
-  display: grid;
-  grid-template-columns: 40fr 60fr;
-  color: var(--blanco);
-  align-items: center;
-  background-color: var(--superficie);
-  border-radius: 0.7rem;
-  gap: 1rem;
 
-  padding: 1rem;
-  margin: 1rem;
-}
-.details h3:first-child {
-  font-family: var(--fuente-titulo);
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--blanco);
-}
-.details-img {
+<style>
+.detail-card {
+  width: min(640px, calc(100% - 1.5rem));
+  min-height: 16rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 260px;
-  width: 260px;
-  border-radius: 0.7rem;
+  align-items: stretch;
+  margin: 1rem auto;
+  background: var(--superficie);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
 }
-.details-img img {
+
+.detail-card__media {
+  flex: 0 0 clamp(150px, 22vw, 240px);
+  background: var(--oscuro);
+}
+
+.detail-card__media img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  display: block;
-  border-radius: 0.7rem;
+  object-fit: cover;
 }
 
-.details-description h3 {
+.detail-card__body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: clamp(1rem, 2.4vw, 1.5rem);
+  color: var(--blanco);
+  background: var(--superficie);
+}
+
+.detail-card__eyebrow {
+  margin-bottom: 0.7rem;
   font-family: var(--fuente-titulo);
-  font-size: clamp(0.82rem, 1.5vw, 1rem);
-  color: var(--gris);
-  font-weight: 400;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dorado);
 }
 
-.details-description h2 {
+.detail-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  max-width: 100%;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.detail-row--description {
+  gap: 0.35rem;
+}
+
+.detail-label {
+  font-family: var(--fuente-titulo);
+  font-size: clamp(0.75rem, 0.95vw, 0.9rem);
+  color: var(--gris);
+}
+
+.detail-value {
   font-family: var(--fuente-cuerpo);
-  font-size: clamp(0.78rem, 1.2vw, 0.9rem);
-  line-height: 1.55;
-  font-weight: 400;
+  font-size: clamp(0.85rem, 1.05vw, 1rem);
+  line-height: 1.35;
+  color: var(--blanco);
+}
+
+.detail-value--title {
+  font-family: var(--fuente-titulo);
+  font-size: clamp(1.25rem, 1.9vw, 1.85rem);
+  line-height: 1.08;
+}
+
+.detail-value--description {
+  font-size: clamp(0.82rem, 1vw, 0.95rem);
 }
 
 @media (max-width: 768px) {
-  .details {
-    display: flex;
+  .detail-card {
+    width: min(100%, calc(100% - 1rem));
+    min-height: auto;
     flex-direction: column;
-    margin: 0.8rem auto;
-    max-width: 95%;
-    padding: 0.85rem;
+    margin: 0.75rem auto;
   }
-  .details-img {
-    height: auto;
-    width: 100%;
+
+  .detail-card__media {
+    flex-basis: auto;
     aspect-ratio: 1 / 1;
   }
-  .details-description h2 {
-    font-size: 1.4rem;
+
+  .detail-card__body {
+    padding: 0.9rem;
   }
-  .details-description h3 {
-    font-size: 1rem;
+
+  .detail-value--title {
+    font-size: 1.3rem;
   }
 }
 </style>
