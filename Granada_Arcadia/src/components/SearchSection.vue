@@ -28,7 +28,7 @@ function handleSearch() {
 </template>
 <style scoped>
 .search-section {
-  width: min(24rem, 88vw);
+  width: min(52rem, calc(100% - 2rem));
   margin: 0.7rem auto 0.45rem;
 }
 
@@ -69,7 +69,7 @@ function handleSearch() {
 
 @media (max-width: 1026px) {
   .search-section {
-    width: min(30rem, 92vw);
+    width: min(60rem, calc(100% - 2rem));
     margin: 1rem auto 0.75rem;
   }
 

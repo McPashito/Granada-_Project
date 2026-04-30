@@ -32,8 +32,8 @@ defineProps({
 
   border-radius: 0.4rem;
   overflow: hidden;
-  width: 8rem;
-  height: 10.5rem;
+  width: 100%;
+  height: 16rem;
   display: flex;
   flex-direction: column;
 }
@@ -56,7 +56,7 @@ defineProps({
 
 .card-image {
   width: 100%;
-  height: 7.6rem;
+  height: 12rem;
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -70,10 +70,10 @@ defineProps({
 
 .card h3 {
   margin: 0;
-  padding: 0 0.45rem;
+  padding: 0 0.7rem;
   color: var(--blanco);
   font-family: var(--fuente-titulo);
-  font-size: 0.68rem;
+  font-size: 0.82rem;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -83,23 +83,22 @@ defineProps({
 
 @media (min-width: 768px) and (max-width: 1026px) {
   .card {
-    width: 10rem;
-    height: 13rem;
+    height: 17rem;
   }
 
   .card-image {
-    height: 9.5rem;
+    height: 13rem;
   }
 
   .card h3 {
-    font-size: 0.75rem;
-    padding: 0 0.55rem;
+    font-size: 0.9rem;
+    padding: 0 0.75rem;
   }
 }
 
 @media (max-width: 767px) {
   .card {
-    width: min(82vw, 14rem);
+    width: 100%;
     height: 16rem;
   }
 
@@ -108,8 +107,8 @@ defineProps({
   }
 
   .card h3 {
-    font-size: 0.8rem;
-    padding: 0 0.55rem;
+    font-size: 0.88rem;
+    padding: 0 0.75rem;
   }
 }
 </style>

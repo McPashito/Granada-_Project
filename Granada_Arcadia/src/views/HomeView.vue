@@ -529,9 +529,9 @@ export default {
 
 .search-band__grid {
   display: grid;
-  grid-template-columns: repeat(3, 8rem);
-  gap: 0.6rem;
-  justify-content: start;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.9rem;
+  justify-content: stretch;
 }
 
 .search-band__empty {

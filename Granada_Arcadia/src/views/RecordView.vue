@@ -153,11 +153,11 @@ export default {
 
 <style>
 .record-layout {
-  width: min(34rem, 100%);
-  margin: 1.25rem 0.35rem;
+  width: min(72rem, 100%);
+  margin: 1.25rem auto;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .record-layout .card-grid {
@@ -176,13 +176,14 @@ export default {
 
 @media (max-width: 767px) {
   .record-layout {
-    width: 92%;
+    width: 100%;
+    padding: 0 1rem;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1026px) {
   .record-layout {
-    width: min(22rem, 100%);
+    width: min(60rem, 100%);
   }
 }
 </style>

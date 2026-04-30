@@ -193,17 +193,18 @@ export default {
 <style scoped>
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 8rem);
-  gap: 0.6rem;
-  padding: 0.6rem 0.8rem;
-  justify-content: center;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.9rem;
+  padding: 0.75rem 0.8rem;
+  justify-content: stretch;
+  justify-items: stretch;
 }
 .search-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 1rem;
+  align-items: stretch;
+  width: 100%;
+  padding: 1rem 0;
   gap: 1rem;
   min-height: 65vh;
 }
@@ -213,7 +214,7 @@ export default {
   border-radius: 0.55rem;
   padding: 1.15rem;
   width: 100%;
-  max-width: 560px;
+  max-width: 72rem;
 
   display: flex;
   flex-direction: column;
@@ -380,13 +381,13 @@ export default {
 
 @media (min-width: 769px) and (max-width: 1025px) {
   .card-grid {
-    grid-template-columns: repeat(2, 10rem);
-    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
+    gap: 0.85rem;
     padding: 0.75rem 0;
   }
 
   .search-panel {
-    max-width: min(800px, 94vw);
+    max-width: min(72rem, 100%);
   }
 
   .results-panel {
@@ -398,7 +399,7 @@ export default {
 @media (max-width: 768px) {
   .card-grid {
     grid-template-columns: 1fr;
-    gap: 0.75rem;
+    gap: 0.85rem;
     padding: 0.75rem 0;
   }
 
@@ -445,7 +446,7 @@ export default {
 
 @media (max-width: 1025px) {
   .search-wrapper {
-    padding: 1.5rem;
+    padding: 1.5rem 0;
     gap: 1.5rem;
     min-height: 80vh;
   }

@@ -16,7 +16,10 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 #app {
