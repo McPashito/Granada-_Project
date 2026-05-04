@@ -1,9 +1,9 @@
 const BASE_URL = '/api/glam'
 
-async function getItem(offset = 0, entity) {
+async function getItem(offset = 0, entity, limit = 16) {
   const respuesta = await fetch(
     BASE_URL +
-      `/${entity}?limit=16&offset=${offset}&with_labels=1&fields=id,thumbnail,title,author`,
+      `/${entity}?limit=${limit}&offset=${offset}&with_labels=1&fields=id,thumbnail,title,author`,
   )
   const datos = await respuesta.json()
   return datos.items
@@ -41,7 +41,7 @@ async function getRecordsFromCollection(params) {
   const datos = await respuesta.json()
   return datos.items
 }
-async function searchQuick(search, offset = 0, entity) {
+async function searchQuick(search, offset = 0, entity, limit = 16) {
   const children =
     entity === 'record'
       ? [
@@ -56,7 +56,7 @@ async function searchQuick(search, offset = 0, entity) {
   })
 
   const respuesta = await fetch(
-    `${BASE_URL}/${entity}?limit=16&offset=${offset}&domain=${encodeURIComponent(domain)}`,
+    `${BASE_URL}/${entity}?limit=${limit}&offset=${offset}&domain=${encodeURIComponent(domain)}`,
   )
 
   const datos = await respuesta.json()

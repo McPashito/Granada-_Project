@@ -7,6 +7,39 @@ import SearchInfo from '@/components/SearchInfo.vue'
 import ItemCardList from '@/components/ItemCardList.vue'
 import ChangingBar from '@/components/ChangingBar.vue'
 
+const GRID_ROWS = 4
+
+function getAvailableGridWidth(element) {
+  if (!element) return 0
+
+  const rect = element.getBoundingClientRect()
+  const styles = window.getComputedStyle(element)
+  const paddingLeft = Number.parseFloat(styles.paddingLeft) || 0
+  const paddingRight = Number.parseFloat(styles.paddingRight) || 0
+
+  return Math.max(0, rect.width - paddingLeft - paddingRight)
+}
+
+function computePageSize(element) {
+  const availableWidth = getAvailableGridWidth(element)
+
+  if (!availableWidth) return 16
+
+  const rootFontSize = Number.parseFloat(
+    window.getComputedStyle(document.documentElement).fontSize,
+  )
+  const viewportWidth = window.innerWidth
+  const isMobile = viewportWidth <= 767
+  const isTablet = viewportWidth >= 768 && viewportWidth <= 1026
+  const minCardRem = isMobile ? 11 : isTablet ? 10.5 : 11
+  const gapRem = isMobile ? 0.85 : isTablet ? 0.85 : 0.9
+  const minCardPx = minCardRem * (rootFontSize || 16)
+  const gapPx = gapRem * (rootFontSize || 16)
+  const columns = Math.max(1, Math.floor((availableWidth + gapPx) / (minCardPx + gapPx)))
+
+  return Math.max(4, columns * GRID_ROWS)
+}
+
 export default {
   components: {
     ItemCard,
@@ -25,22 +58,27 @@ export default {
       hasSearched: false,
       isLoading: false,
       view: 'grid',
+      pageSize: 16,
+      layoutObserver: null,
     }
   },
   async mounted() {
     const query = this.$route.query.q
 
     if (query) {
-      this.isLoading = true
-      try {
-        this.searchText = query
-        this.hasSearched = true
-        this.records = await searchQuick(query, this.offset, this.entity)
-      } finally {
-        this.isLoading = false
-      }
-    } else {
-      this.records = await getItem(this.offset, this.entity)
+      this.searchText = query
+      this.hasSearched = true
+    }
+
+    await this.$nextTick()
+    this.pageSize = computePageSize(this.$refs.layoutRoot) || this.pageSize
+    this.setupLayoutObserver()
+    await this.loadCurrentPage()
+  },
+  beforeUnmount() {
+    if (this.layoutObserver) {
+      this.layoutObserver.disconnect()
+      this.layoutObserver = null
     }
   },
   watch: {
@@ -49,28 +87,71 @@ export default {
         this.searchText = ''
         this.hasSearched = false
         this.offset = 0
-        this.records = await getItem(this.offset, this.entity)
+        await this.loadCurrentPage()
       }
     },
   },
   methods: {
-    async loadMore() {
-      this.offset += 16
-      if (this.searchText.trim()) {
-        this.records = await searchQuick(this.searchText, this.offset, this.entity)
+    setupLayoutObserver() {
+      const element = this.$refs.layoutRoot
+
+      if (!element) return
+
+      const update = async () => {
+        const nextPageSize = computePageSize(element)
+
+        if (nextPageSize !== this.pageSize) {
+          const previousPageSize = this.pageSize
+          const currentPage = Math.floor(this.offset / previousPageSize)
+          this.pageSize = nextPageSize
+          this.offset = currentPage * nextPageSize
+          await this.loadCurrentPage()
+        }
+      }
+
+      if (window.ResizeObserver) {
+        this.layoutObserver = new ResizeObserver(() => {
+          update()
+        })
+        this.layoutObserver.observe(element)
       } else {
-        this.records = await getItem(this.offset, this.entity)
+        window.addEventListener('resize', update)
+        this.layoutObserver = {
+          disconnect() {
+            window.removeEventListener('resize', update)
+          },
+        }
       }
     },
-    async loadLess() {
-      if (this.offset >= 16) {
-        this.offset -= 16
+    async loadCurrentPage() {
+      this.isLoading = true
 
+      try {
         if (this.searchText.trim()) {
-          this.records = await searchQuick(this.searchText, this.offset, this.entity)
+          this.records = await searchQuick(
+            this.searchText,
+            this.offset,
+            this.entity,
+            this.pageSize,
+          )
         } else {
-          this.records = await getItem(this.offset, this.entity)
+          this.records = await getItem(this.offset, this.entity, this.pageSize)
         }
+      } catch (error) {
+        console.error('Error loading records:', error)
+        this.records = []
+      } finally {
+        this.isLoading = false
+      }
+    },
+    async loadMore() {
+      this.offset += this.pageSize
+      await this.loadCurrentPage()
+    },
+    async loadLess() {
+      if (this.offset >= this.pageSize) {
+        this.offset -= this.pageSize
+        await this.loadCurrentPage()
       }
     },
     async handleSearch(searchText) {
@@ -85,24 +166,20 @@ export default {
       }
       if (this.isLoading) return
 
-      this.isLoading = true
       this.hasSearched = true
-      try {
-        if (!searchText.trim()) {
-          this.offset = 0
-          this.records = await getItem(this.offset, this.entity)
+      this.offset = 0
 
-          return
-        } else {
-          this.offset = 0
-          this.records = await searchQuick(this.searchText, this.offset, this.entity)
-        }
-      } catch (error) {
-        console.error('Error searching records:', error)
-        this.records = []
-      } finally {
-        this.isLoading = false
+      if (query) {
+        await this.loadCurrentPage()
+        return
       }
+
+      if (this.$route.query.q) {
+        this.$router.push({ query: {} })
+        return
+      }
+
+      await this.loadCurrentPage()
     },
     setView(view) {
       this.view = view
@@ -114,7 +191,7 @@ export default {
 <template>
   <SearchSection @search="handleSearch" />
 
-  <div class="record-layout">
+  <div class="record-layout" ref="layoutRoot">
     <ChangingBar :active-view="view" @change-view="setView" />
     <SearchInfo
       v-if="hasSearched"
@@ -146,6 +223,7 @@ export default {
   <PaginationComponent
     :offset="offset"
     :itemsLength="records.length"
+    :page-size="pageSize"
     @prev="loadLess"
     @next="loadMore"
   />
